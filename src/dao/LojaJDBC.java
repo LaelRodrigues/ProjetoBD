@@ -1,4 +1,4 @@
-package lojaDaoJDBC;
+package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,8 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
-import entidade.Loja;
-import interfaceDAO.ILoja;
+import model.Loja;
 
 public class LojaJDBC implements ILoja {
 	
