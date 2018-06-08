@@ -7,6 +7,9 @@ public class Loja {
 	private String email;
 	private int cepLoja;
 	
+	public Loja() {
+	}
+	
 	public Loja(int cnpj, String nome, String email, int cepLoja) {
 		super();
 		this.cnpj = cnpj;
@@ -14,6 +17,14 @@ public class Loja {
 		this.email = email;
 		this.cepLoja = cepLoja;
 	}
+	
+	public Loja(int cnpj, String nome, String email) {
+		super();
+		this.cnpj = cnpj;
+		this.nome = nome;
+		this.email = email;
+	}
+	
 	
 	public int getCnpj() {
 		return cnpj;

@@ -1,5 +1,3 @@
-/conexao/
-/entidade/
-/interfaceDAO/
-/lojaDaoJDBC/
 /main/
+/lojaDaoJDBC/
+/entidade/

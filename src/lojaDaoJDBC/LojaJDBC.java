@@ -1,6 +1,7 @@
 package lojaDaoJDBC;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -48,7 +49,7 @@ public class LojaJDBC implements ILoja {
 	@Override
 	public void inserir(Loja loja) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO LOJA (");
+        buffer.append("INSERT INTO Loja (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
         buffer.append(this.retornarValoresBD(loja));
@@ -69,7 +70,26 @@ public class LojaJDBC implements ILoja {
 	@Override
 	public Loja buscar(int cnpj) {
 		
-		return null;
+		Loja loja = new Loja();
+
+		try {
+			conectar();
+            String sql = "SELECT * FROM loja WHERE cnpjLoja=" + cnpj;
+                ResultSet rs = comando.executeQuery(sql);
+                if (rs.next()) {
+                	loja.setCnpj(rs.getInt("cnpjLoja"));
+    				loja.setNome(rs.getString("nome"));
+    				loja.setEmail(rs.getString("email"));
+    				loja.setCepLoja(rs.getInt("cepLoja"));
+    				System.out.println(loja.getNome());
+                }
+            
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+        return loja;
 	}
 
 	@Override
