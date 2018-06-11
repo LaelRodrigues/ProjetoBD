@@ -7,10 +7,10 @@ import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
-import entidade.Loja;
-import interfaceDAO.ILoja;
+import entidade.Endereco;
+import interfaceDAO.IEndereco;
 
-public class LojaJDBC implements ILoja {
+public class EnderecoJDBC implements IEndereco {
 	
 	private String URL;
 	private String NOME;
@@ -19,20 +19,20 @@ public class LojaJDBC implements ILoja {
 	private Connection con;  
 	private Statement comando;
 	
-	public LojaJDBC(String server, String user, String password) throws SQLException {
+	public EnderecoJDBC(String server, String user, String password) throws SQLException {
 		this.URL = server;
 		this.NOME = user;
 		this.SENHA = password;
 	}
 
 	@Override
-	public void atualizar(Loja loja) {
+	public void atualizar(Endereco endereco) {
 		
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("UPDATE loja SET ");
-        buffer.append(returnFieldValuesBD(loja));
-        buffer.append(" WHERE cnpj=");
-        buffer.append(loja.getCnpj());
+        buffer.append("UPDATE Endereco SET ");
+        buffer.append(returnFieldValuesBD(endereco));
+        buffer.append(" WHERE cep=");
+        buffer.append(endereco.getCep());
         String sql = buffer.toString();
         
     	try {
@@ -47,19 +47,18 @@ public class LojaJDBC implements ILoja {
 	}
 
 	@Override
-	public void inserir(Loja loja) {
+	public void inserir(Endereco endereco) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Loja (");
+        buffer.append("INSERT INTO Endereco (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(loja));
+        buffer.append(this.retornarValoresBD(endereco));
         buffer.append(")");
         String sql = buffer.toString();
 
     	try {
 			conectar();
     		comando.execute(sql);
-    		System.out.println("estou aqui");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -68,20 +67,21 @@ public class LojaJDBC implements ILoja {
 	}
 
 	@Override
-	public Loja buscar(String cnpj) {
+	public Endereco buscar(String cep) {
 		
-		Loja loja = new Loja();
+		Endereco endereco = new Endereco();
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM loja WHERE cnpjLoja=" + cnpj;
+            String sql = "SELECT * FROM Endereco WHERE cep=" + cep;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
-                	loja.setCnpj(rs.getString("cnpjLoja"));
-    				loja.setNome(rs.getString("nome"));
-    				loja.setEmail(rs.getString("email"));
-    				loja.setCepLoja(rs.getString("cepLoja"));
-    				System.out.println(loja.getNome());
+                	endereco.setCep(rs.getString("cep"));
+    				endereco.setUf(rs.getString("uf"));
+    				endereco.setCidade(rs.getString("cidade"));
+    				endereco.setBairro(rs.getString("bairro"));
+    				endereco.setLogradouro(rs.getString("logradouro"));
+    				System.out.println(returnFieldValuesBD(endereco));
                 }
             
         } catch (SQLException SQLe) {
@@ -89,17 +89,17 @@ public class LojaJDBC implements ILoja {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        return loja;
+        return endereco;
 	}
 
 	@Override
-	public void remover(Loja loja) {
-		if(loja.getCnpj()=="") {
-			loja.setCnpj("\"\"");
-			System.out.println(loja.getCnpj());
+	public void remover(Endereco endereco) {
+		if(endereco.getCep()=="") {
+			endereco.setCep("\"\"");
+			System.out.println(endereco.getCep());
 		}
-    	String sql_2 ="DELETE FROM Loja WHERE cnpjLoja=" + loja.getCnpj() + ";";
-    	System.out.println(loja.getCnpj());
+    	String sql_2 ="DELETE FROM Endereco WHERE cep=" + endereco.getCep() + ";";
+    	System.out.println(endereco.getCep());
     	try {
 			conectar();
     		//comando.execute(sql_1);
@@ -112,8 +112,7 @@ public class LojaJDBC implements ILoja {
 		}
 	}
 
-	@Override
-	public List<Loja> listarLojas() {
+	public List<Endereco> listarEnderecos() {
 		return null;
 	}
 	
@@ -121,31 +120,35 @@ public class LojaJDBC implements ILoja {
     	return "cnpjLoja, nome, email, cepLoja";
     }
 	
-	protected String returnFieldValuesBD(Loja loja) {
+	protected String returnFieldValuesBD(Endereco endereco) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("cnpj=");
-        buffer.append(retornarValorStringBD(loja.getCnpj()));
-        buffer.append(", nome=");
-        buffer.append(retornarValorStringBD(loja.getNome()));
-        buffer.append(", email=");
-        buffer.append(retornarValorStringBD(loja.getEmail()));
-        buffer.append(", cep=");
-        buffer.append(loja.getCepLoja());
+        buffer.append("cep=");
+        buffer.append(retornarValorStringBD(endereco.getCep()));
+        buffer.append(", uf=");
+        buffer.append(retornarValorStringBD(endereco.getUf()));
+        buffer.append(", cidade=");
+        buffer.append(retornarValorStringBD(endereco.getCidade()));
+        buffer.append(", bairro=");
+        buffer.append(retornarValorStringBD(endereco.getBairro()));
+        buffer.append(", logradouro=");
+        buffer.append(endereco.getLogradouro());
 
         return buffer.toString();
     }
 	
-	 protected String retornarValoresBD(Loja loja) {
+	 protected String retornarValoresBD(Endereco endereco) {
 		 	
 		 	return
-		        retornarValorStringBD(loja.getCnpj())
+		        retornarValorStringBD(endereco.getCep())
 		        + ", "
-		        + retornarValorStringBD(loja.getNome())
+		        + retornarValorStringBD(endereco.getUf())
 		        + ", "
-		        + retornarValorStringBD(loja.getEmail())
+		        + retornarValorStringBD(endereco.getCidade())
 		        + ", "
-		        + loja.getCepLoja();
+		        + retornarValorStringBD(endereco.getBairro())
+		        + ", "
+		        + endereco.getLogradouro();
 	    }
 	    
 	    private String retornarValorStringBD(String valor) {
@@ -196,6 +199,4 @@ public class LojaJDBC implements ILoja {
 	        con = null;
 	    }
 	}
-	
-
 }

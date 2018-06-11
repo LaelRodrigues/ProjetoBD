@@ -6,10 +6,11 @@ import lojaDaoJDBC.LojaJDBC;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		
-		Loja loja = new Loja(2,"loja","loja21@gmail.com", 1);
+		String a = "";
+		Loja loja = new Loja(a,"loja","loja21@gmail.com", null);
 		LojaJDBC empDao = new LojaJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
 		
-		empDao.inserir(loja);
+		empDao.remover(loja);
 		empDao.commit();
 		
 		

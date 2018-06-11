@@ -2,34 +2,24 @@ package entidade;
 
 public class Loja {
 	
-	private int cnpj;
+	private String cnpj;
 	private String nome;
 	private String email;
-	private int cepLoja;
+	private String cepLoja;
 	
-	public Loja() {
-	}
+	public Loja() {}
 	
-	public Loja(int cnpj, String nome, String email, int cepLoja) {
-		super();
+	public Loja(String cnpj, String nome, String email, String cepLoja) {
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.email = email;
 		this.cepLoja = cepLoja;
 	}
-	
-	public Loja(int cnpj, String nome, String email) {
-		super();
-		this.cnpj = cnpj;
-		this.nome = nome;
-		this.email = email;
-	}
-	
-	
-	public int getCnpj() {
+
+	public String getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(int cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 	public String getNome() {
@@ -44,10 +34,10 @@ public class Loja {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getCepLoja() {
+	public String getCepLoja() {
 		return cepLoja;
 	}
-	public void setCepLoja(int cepLoja) {
+	public void setCepLoja(String cepLoja) {
 		this.cepLoja = cepLoja;
 	}
 	
