@@ -1,4 +1,4 @@
-package lojaDaoJDBC;
+package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
-import entidade.Endereco;
 import interfaceDAO.IEndereco;
+import model.Endereco;
 
 public class EnderecoJDBC implements IEndereco {
 	

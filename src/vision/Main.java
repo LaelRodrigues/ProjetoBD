@@ -1,7 +1,7 @@
-package main;
+package vision;
 
-import entidade.Loja;
-import lojaDaoJDBC.LojaJDBC;
+import dao.LojaJDBC;
+import model.Loja;
 
 public class Main {
 	public static void main(String[] args) throws Exception {

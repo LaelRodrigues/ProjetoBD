@@ -2,7 +2,7 @@ package interfaceDAO;
 
 import java.util.List;
 
-import entidade.Endereco;
+import model.Endereco;
 
 public interface IEndereco {
 	
