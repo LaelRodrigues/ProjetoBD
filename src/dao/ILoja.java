@@ -1,8 +1,8 @@
-package interfaceDAO;
+package dao;
 
 import java.util.List;
 
-import entidade.Loja;
+import model.Loja;
 
 public interface ILoja {
 	
