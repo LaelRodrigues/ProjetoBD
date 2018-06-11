@@ -11,6 +11,7 @@ public class Endereco {
 	public Endereco() {}
 	
 	public Endereco(String cep, String uf, String cidade, String bairro, String logradouro) {
+		super();
 		this.cep = cep;
 		this.uf = uf;
 		this.cidade = cidade;

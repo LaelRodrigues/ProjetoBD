@@ -1,17 +1,20 @@
 package vision;
 
-import dao.LojaJDBC;
-import model.Loja;
+import dao.*;
+import model.*;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
 		
-		String a = "";
-		Loja loja = new Loja(a,"loja","loja21@gmail.com", null);
-		LojaJDBC empDao = new LojaJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
+		Loja loja = new Loja("1","loja","loja21@gmail.com", "2");
+		Endereco endereco = new Endereco("2","RN", "natal", "coophab","A");
+		LojaJDBC lojaDao = new LojaJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
+		EnderecoJDBC enderecoDao = new EnderecoJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
 		
-		empDao.remover(loja);
-		empDao.commit();
+		lojaDao.remover(loja);
+		lojaDao.commit();
+		
+		
 		
 		
 	}

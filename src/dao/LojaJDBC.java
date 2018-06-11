@@ -98,13 +98,11 @@ public class LojaJDBC implements ILoja {
 			loja.setCnpj("\"\"");
 			System.out.println(loja.getCnpj());
 		}
-    	String sql_2 ="DELETE FROM Loja WHERE cnpjLoja=" + loja.getCnpj() + ";";
+    	String sql ="DELETE FROM Loja WHERE cnpjLoja=" + loja.getCnpj() + ";";
     	System.out.println(loja.getCnpj());
     	try {
 			conectar();
-    		//comando.execute(sql_1);
-    		comando.execute(sql_2);
-    		//comando.execute(sql_3);
+    		comando.execute(sql);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

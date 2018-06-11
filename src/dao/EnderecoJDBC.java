@@ -117,13 +117,13 @@ public class EnderecoJDBC implements IEndereco {
 	}
 	
 	protected String retornarCamposBD() {
-    	return "cnpjLoja, nome, email, cepLoja";
+    	return "cep, uf, cidade, bairro, logradouro";
     }
 	
 	protected String returnFieldValuesBD(Endereco endereco) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("cep=");
+        buffer.append("cep =");
         buffer.append(retornarValorStringBD(endereco.getCep()));
         buffer.append(", uf=");
         buffer.append(retornarValorStringBD(endereco.getUf()));
@@ -148,7 +148,7 @@ public class EnderecoJDBC implements IEndereco {
 		        + ", "
 		        + retornarValorStringBD(endereco.getBairro())
 		        + ", "
-		        + endereco.getLogradouro();
+		        + retornarValorStringBD(endereco.getLogradouro());
 	    }
 	    
 	    private String retornarValorStringBD(String valor) {
