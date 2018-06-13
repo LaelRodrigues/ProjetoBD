@@ -19,8 +19,6 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-
-
 	public String getCep() {
 		return cep;
 	}
