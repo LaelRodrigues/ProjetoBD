@@ -7,10 +7,10 @@ import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
-import interfaceDAO.IFornecedor;
-import model.Fornecedor;
+import interfaceDAO.ITransportadora;
+import model.Transportadora;
 
-public class FornecedorJDBC implements IFornecedor {
+public class TransportadoraJDBC implements ITransportadora {
 	
 	private String URL;
 	private String NOME;
@@ -19,20 +19,20 @@ public class FornecedorJDBC implements IFornecedor {
 	private Connection con;  
 	private Statement comando;
 	
-	public FornecedorJDBC(String server, String user, String password) throws SQLException {
+	public TransportadoraJDBC(String server, String user, String password) throws SQLException {
 		this.URL = server;
 		this.NOME = user;
 		this.SENHA = password;
 	}
 
 	@Override
-	public void atualizar(Fornecedor fornecedor) {
+	public void atualizar(Transportadora transportadora) {
 		
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("UPDATE fornecedor SET ");
-        buffer.append(returnFieldValuesBD(fornecedor));
+        buffer.append("UPDATE transportadora SET ");
+        buffer.append(returnFieldValuesBD(transportadora));
         buffer.append(" WHERE cnpj=");
-        buffer.append(fornecedor.getCnpj());
+        buffer.append(transportadora.getCnpj());
         String sql = buffer.toString();
         
     	try {
@@ -47,12 +47,12 @@ public class FornecedorJDBC implements IFornecedor {
 	}
 
 	@Override
-	public void inserir(Fornecedor fornecedor) {
+	public void inserir(Transportadora transportadora) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Fornecedor (");
+        buffer.append("INSERT INTO Transportadora (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(fornecedor));
+        buffer.append(this.retornarValoresBD(transportadora));
         buffer.append(")");
         String sql = buffer.toString();
 
@@ -68,20 +68,20 @@ public class FornecedorJDBC implements IFornecedor {
 	}
 
 	@Override
-	public Fornecedor buscar(String cnpj) {
+	public Transportadora buscar(String cnpj) {
 		
-		Fornecedor fornecedor = new Fornecedor();
+		Transportadora transportadora = new Transportadora();
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM fornecedor WHERE cnpjFornecedor=" + cnpj;
+            String sql = "SELECT * FROM transportadora WHERE cnpjTransportadora=" + cnpj;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
-                	fornecedor.setCnpj(rs.getString("cnpjFornecedor"));
-                	fornecedor.setNome(rs.getString("nome"));
-                	fornecedor.setEmail(rs.getString("email"));
-                	fornecedor.setCepFornecedor(rs.getString("cepFornecedor"));
-    				System.out.println(fornecedor.getNome());
+                	transportadora.setCnpj(rs.getString("cnpjTransportadora"));
+                	transportadora.setNome(rs.getString("nome"));
+                	transportadora.setEmail(rs.getString("email"));
+                	transportadora.setCepTransportadora(rs.getString("cepTransportadora"));
+    				System.out.println(transportadora.getNome());
                 }
             
         } catch (SQLException SQLe) {
@@ -89,17 +89,17 @@ public class FornecedorJDBC implements IFornecedor {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        return fornecedor;
+        return transportadora;
 	}
 
 	@Override
-	public void remover(Fornecedor fornecedor) {
-		if(fornecedor.getCnpj()=="") {
-			fornecedor.setCnpj("\"\"");
-			System.out.println(fornecedor.getCnpj());
+	public void remover(Transportadora transportadora) {
+		if(transportadora.getCnpj()=="") {
+			transportadora.setCnpj("\"\"");
+			System.out.println(transportadora.getCnpj());
 		}
-    	String sql ="DELETE FROM Fornecedor WHERE cnpjFornecedor=" + fornecedor.getCnpj() + ";";
-    	System.out.println(fornecedor.getCnpj());
+    	String sql ="DELETE FROM Transportadora WHERE cnpjTransportadora=" + transportadora.getCnpj() + ";";
+    	System.out.println(transportadora.getCnpj());
     	try {
 			conectar();
     		comando.execute(sql);
@@ -111,39 +111,39 @@ public class FornecedorJDBC implements IFornecedor {
 	}
 
 	@Override
-	public List<Fornecedor> listarFornecedores() {
+	public List<Transportadora> listarTransportadoras() {
 		return null;
 	}
 	
 	protected String retornarCamposBD() {
-    	return "cnpjFornecedor, nome, email, cepFornecedor";
+    	return "cnpjTransportadora, nome, email, cepTransportadora";
     }
 	
-	protected String returnFieldValuesBD(Fornecedor fornecedor) {
+	protected String returnFieldValuesBD(Transportadora transportadora) {
 		
         StringBuffer buffer = new StringBuffer();
         buffer.append("cnpj=");
-        buffer.append(retornarValorStringBD(fornecedor.getCnpj()));
+        buffer.append(retornarValorStringBD(transportadora.getCnpj()));
         buffer.append(", nome=");
-        buffer.append(retornarValorStringBD(fornecedor.getNome()));
+        buffer.append(retornarValorStringBD(transportadora.getNome()));
         buffer.append(", email=");
-        buffer.append(retornarValorStringBD(fornecedor.getEmail()));
+        buffer.append(retornarValorStringBD(transportadora.getEmail()));
         buffer.append(", cep=");
-        buffer.append(retornarValorStringBD(fornecedor.getcepFornecedor()));
+        buffer.append(retornarValorStringBD(transportadora.getcepTransportadora()));
 
         return buffer.toString();
     }
 	
-	protected String retornarValoresBD(Fornecedor fornecedor) {
+	protected String retornarValoresBD(Transportadora transportadora) {
 		 	
 		 	return
-		        retornarValorStringBD(fornecedor.getCnpj())
+		        retornarValorStringBD(transportadora.getCnpj())
 		        + ", "
-		        + retornarValorStringBD(fornecedor.getNome())
+		        + retornarValorStringBD(transportadora.getNome())
 		        + ", "
-		        + retornarValorStringBD(fornecedor.getEmail())
+		        + retornarValorStringBD(transportadora.getEmail())
 		        + ", "
-		        + retornarValorStringBD(fornecedor.getcepFornecedor());
+		        + retornarValorStringBD(transportadora.getcepTransportadora());
 	    }
 	    
 	private String retornarValorStringBD(String valor) {
