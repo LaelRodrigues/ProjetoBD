@@ -1,9 +1,7 @@
-/main/
-/lojaDaoJDBC/
-/entidade/
-/interfaceDAO/
+/conexao/
 /dao/
+/interfaceDAO/
 /model/
-/vision/
-/util/
 /services/
+/util/
+/vision/
