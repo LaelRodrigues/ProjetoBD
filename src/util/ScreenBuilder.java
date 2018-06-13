@@ -21,14 +21,6 @@ public class ScreenBuilder {
 		pane = paneout;
 		primaryStage = primaryStageout;
 		
-		//essa parada ta quebrada n sei pq
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
-			public void handle(WindowEvent event) {
-				UserServices.getDao().close();
-				System.exit(0);
-			}
-		});
 	}
 
 	// -----------------------------------constroi as telas

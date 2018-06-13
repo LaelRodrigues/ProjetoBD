@@ -10,19 +10,11 @@ import conexao.ConFactory;
 import interfaceDAO.IEndereco;
 import model.Endereco;
 
-public class EnderecoJDBC implements IEndereco {
+public class EnderecoJDBC extends GenericDao implements IEndereco {
 	
-	private String URL;
-	private String NOME;
-	private String SENHA;
-	
-	private Connection con;  
-	private Statement comando;
-	
-	public EnderecoJDBC(String server, String user, String password) throws SQLException {
-		this.URL = server;
-		this.NOME = user;
-		this.SENHA = password;
+
+	public EnderecoJDBC(String server, String user, String password) {
+		super(server, user, password);
 	}
 
 	@Override

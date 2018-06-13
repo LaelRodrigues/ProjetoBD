@@ -10,7 +10,7 @@ import conexao.ConFactory;
 import interfaceDAO.ILoja;
 import model.Loja;
 
-public class LojaJDBC implements ILoja {
+public class LojaJDBC extends GenericDao implements ILoja {
 	
 	private String URL;
 	private String NOME;
@@ -19,10 +19,8 @@ public class LojaJDBC implements ILoja {
 	private Connection con;  
 	private Statement comando;
 	
-	public LojaJDBC(String server, String user, String password) throws SQLException {
-		this.URL = server;
-		this.NOME = user;
-		this.SENHA = password;
+	public LojaJDBC(String server, String user, String password) {
+		super(server, user, password);
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class LojaJDBC implements ILoja {
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM loja WHERE cnpjLoja=" + cnpj;
+            String sql = "SELECT * FROM Loja WHERE cnpjLoja=" + cnpj;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
                 	loja.setCnpj(rs.getString("cnpjLoja"));
