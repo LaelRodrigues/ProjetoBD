@@ -1,11 +1,20 @@
 package services;
 
-import javafx.stage.Stage;
+import dao.UserDao;
+import model.User;
 
 public class UserServices {
 
-	public static Stage getDao() {
-		return null;
+	UserDao userDao = new UserDao(); 
+	
+	public UserDao getDao() {
+		return userDao;
+	}
+	
+	public Boolean login(String usuario, String senha) {
+		User remote;
+		remote = userDao.buscar(usuario);
+		return senha == remote.getSenha();
 	}
 
 }

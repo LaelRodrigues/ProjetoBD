@@ -1,33 +1,21 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
 import interfaceDAO.IUser;
 import model.User;
 
-public class UserDao implements IUser{
+public class UserDao extends GenericDao implements IUser{
 	
-	private String URL;
-	private String NOME;
-	private String SENHA;
-	
-	private Connection con;  
-	private Statement comando;
-	
-	public UserDao(String server, String user, String password) throws SQLException {
-		this.URL = server;
-		this.NOME = user;
-		this.SENHA = password;
+	public UserDao(){
+		super();
 	}
 
 	@Override
 	public void atualizar(User user) {
-		// TODO Auto-generated method stub
 		StringBuffer buffer = new StringBuffer();
         buffer.append("UPDATE User SET ");
         buffer.append(returnFieldValuesBD(user));
@@ -75,6 +63,33 @@ public class UserDao implements IUser{
 		try {
 			conectar();
             String sql = "SELECT * FROM User WHERE id=" + id;
+                ResultSet rs = comando.executeQuery(sql);
+                if (rs.next()) {
+                	//user.setCnpj(rs.getString("cnpjLoja"));
+                	user.setId(new Double (rs.getString("id")));
+                	user.setNome(rs.getString("nome"));
+                	user.setSenha(rs.getString("senha"));
+                	user.setCargo(rs.getString("cargo"));
+    				//user.setEmail(rs.getString("email"));
+    				//user.setCepLoja(rs.getString("cepLoja"));
+    				System.out.println(user.getNome());
+                }
+            
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+        return user;
+	}
+	
+	public User buscar(String nome) {
+		// TODO Auto-generated method stub
+		User user = new User();
+
+		try {
+			conectar();
+            String sql = "SELECT * FROM User WHERE nome=" + nome;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
                 	//user.setCnpj(rs.getString("cnpjLoja"));
