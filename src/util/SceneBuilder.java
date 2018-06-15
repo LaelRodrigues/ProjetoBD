@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import vision.Main;
+import main.Main;
 
 public class SceneBuilder {
 

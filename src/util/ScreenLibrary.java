@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import util.ScreenConstants;
 
 public class ScreenLibrary {
 	

@@ -46,7 +46,7 @@ public class ScreenBuilder {
 	
 	public static void renderLoginScreen() {
 
-		path = "Login_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		path = "/vision/Login_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
 		title = "Login"; // nome q aparece no topo da tela
 		buildScreen();
 
