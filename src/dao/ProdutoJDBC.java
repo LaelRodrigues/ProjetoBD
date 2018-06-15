@@ -25,13 +25,13 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
 	}
 
 	@Override
-	public void atualizar(Produto Produto) {
+	public void atualizar(Produto produto) {
 		
 		StringBuffer buffer = new StringBuffer();
         buffer.append("UPDATE Produto SET ");
-        buffer.append(returnFieldValuesBD(loja));
-        buffer.append(" WHERE cnpj=");
-        buffer.append(loja.getCnpj());
+        buffer.append(returnFieldValuesBD(produto));
+        buffer.append(" WHERE codigo=");
+        buffer.append(produto.getCodigo());
         String sql = buffer.toString();
         
     	try {
@@ -48,10 +48,10 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
 	@Override
 	public void inserir(Produto produto) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Loja (");
+        buffer.append("INSERT INTO Produto (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(loja));
+        buffer.append(this.retornarValoresBD(produto));
         buffer.append(")");
         String sql = buffer.toString();
 
@@ -81,7 +81,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
     				produto.setDescricao(rs.getString("descricao"));
     				produto.setD_validade(rs.getDate("cepLoja"));
     				produto.setForneCnpj(rs.getString("forneCnpj"));
-    				System.out.println(loja.getNome());
+    				System.out.println(produto.getNome());
                 }
             
         } catch (SQLException SQLe) {
@@ -89,7 +89,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        return loja;
+        return produto;
 	}
 
 	@Override
