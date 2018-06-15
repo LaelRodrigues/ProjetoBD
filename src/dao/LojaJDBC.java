@@ -1,9 +1,7 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -11,13 +9,6 @@ import interfaceDAO.ILoja;
 import model.Loja;
 
 public class LojaJDBC extends GenericDao implements ILoja {
-	
-	private String URL;
-	private String NOME;
-	private String SENHA;
-	
-	private Connection con;  
-	private Statement comando;
 	
 	public LojaJDBC(String server, String user, String password) {
 		super(server, user, password);
@@ -192,6 +183,4 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	        con = null;
 	    }
 	}
-	
-
 }

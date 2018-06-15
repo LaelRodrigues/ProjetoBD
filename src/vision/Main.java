@@ -11,7 +11,7 @@ import model.Loja;
 import util.SceneBuilder;
 import util.ScreenConstants;
 
-public class Main extends Application{
+public class Main {
 	public static void main(String[] args)  throws Exception {
 		
 		Loja loja = new Loja("1","loja","loja21@gmail.com", "2");
@@ -19,18 +19,8 @@ public class Main extends Application{
 		LojaJDBC lojaDao = new LojaJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
 		EnderecoJDBC enderecoDao = new EnderecoJDBC("jdbc:mysql://localhost/Estoque","aluno","aluno");
 		
-		lojaDao.remover(loja);
-		lojaDao.commit();
-		
-		launch(args);
-		
-		
+		enderecoDao.inserir(endereco);
+		enderecoDao.commit();
 		
 	}
-	
-	@Override
-	public void start(Stage primarystage) throws UnsupportedEncodingException {
-		SceneBuilder.setPrimaryStage(primarystage);
-		SceneBuilder.LoadScreen(ScreenConstants.IDLOGIN);
-	} 
 }

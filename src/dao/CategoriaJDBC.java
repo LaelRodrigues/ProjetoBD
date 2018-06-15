@@ -5,23 +5,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 import conexao.ConFactory;
-import interfaceDAO.IEndereco;
-import model.Endereco;
+import interfaceDAO.ICategoria;
+import model.Categoria;
 
-public class EnderecoJDBC extends GenericDao implements IEndereco {
+public class CategoriaJDBC extends GenericDao implements ICategoria {
 	
-	public EnderecoJDBC(String server, String user, String password) {
+	public CategoriaJDBC(String server, String user, String password) {
 		super(server, user, password);
 	}
-
+	
 	@Override
-	public void atualizar(Endereco endereco) {
+	public void atualizar(Categoria categoria) {
 		
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("UPDATE Endereco SET ");
-        buffer.append(returnFieldValuesBD(endereco));
-        buffer.append(" WHERE cep=");
-        buffer.append(endereco.getCep());
+        buffer.append("UPDATE Categoria SET ");
+        buffer.append(returnFieldValuesBD(categoria));
+        buffer.append(" WHERE codigoProd=");
+        buffer.append(categoria.getCodigoProd());
         String sql = buffer.toString();
         
     	try {
@@ -36,12 +36,12 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 	}
 
 	@Override
-	public void inserir(Endereco endereco) {
+	public void inserir(Categoria categoria) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Endereco (");
+        buffer.append("INSERT INTO Categoria (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(endereco));
+        buffer.append(this.retornarValoresBD(categoria));
         buffer.append(")");
         String sql = buffer.toString();
 
@@ -56,21 +56,18 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 	}
 
 	@Override
-	public Endereco buscar(String cep) {
+	public Categoria buscar(Integer codigoProd) {
 		
-		Endereco endereco = new Endereco();
+		Categoria categoria = new Categoria();
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM Endereco WHERE cep=" + cep;
+            String sql = "SELECT * FROM Categoria WHERE codigoProd=" + codigoProd;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
-                	endereco.setCep(rs.getString("cep"));
-    				endereco.setUf(rs.getString("uf"));
-    				endereco.setCidade(rs.getString("cidade"));
-    				endereco.setBairro(rs.getString("bairro"));
-    				endereco.setLogradouro(rs.getString("logradouro"));
-    				System.out.println(returnFieldValuesBD(endereco));
+                	categoria.setCodigoProd(rs.getInt("codigoProd"));
+    				categoria.setCategoria(rs.getString("categoria"));
+    				System.out.println(categoria.getCodigoProd());
                 }
             
         } catch (SQLException SQLe) {
@@ -78,22 +75,17 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        return endereco;
+        return categoria;
 	}
 
 	@Override
-	public void remover(Endereco endereco) {
-		if(endereco.getCep()=="") {
-			endereco.setCep("\"\"");
-			System.out.println(endereco.getCep());
-		}
-    	String sql_2 ="DELETE FROM Endereco WHERE cep=" + endereco.getCep() + ";";
-    	System.out.println(endereco.getCep());
+	public void remover(Categoria categoria) {
+		
+    	String sql ="DELETE FROM Categoria WHERE codigoProd=" + categoria.getCodigoProd() + ";";
+    	System.out.println(categoria.getCodigoProd());
     	try {
 			conectar();
-    		//comando.execute(sql_1);
-    		comando.execute(sql_2);
-    		//comando.execute(sql_3);
+    		comando.execute(sql);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -101,43 +93,32 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 		}
 	}
 
-	public List<Endereco> listarEnderecos() {
+	@Override
+	public List<Categoria> listarCategoriasProdutos() {
 		return null;
 	}
 	
 	protected String retornarCamposBD() {
-    	return "cep, uf, cidade, bairro, logradouro";
+    	return "codigoProd, categoria";
     }
 	
-	protected String returnFieldValuesBD(Endereco endereco) {
+	protected String returnFieldValuesBD(Categoria categoria) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("cep =");
-        buffer.append(retornarValorStringBD(endereco.getCep()));
-        buffer.append(", uf=");
-        buffer.append(retornarValorStringBD(endereco.getUf()));
-        buffer.append(", cidade=");
-        buffer.append(retornarValorStringBD(endereco.getCidade()));
-        buffer.append(", bairro=");
-        buffer.append(retornarValorStringBD(endereco.getBairro()));
-        buffer.append(", logradouro=");
-        buffer.append(endereco.getLogradouro());
+        buffer.append("codigoProd=");
+        buffer.append(categoria.getCodigoProd());
+        buffer.append(", categoria=");
+        buffer.append(retornarValorStringBD(categoria.getCategoria()));
 
         return buffer.toString();
     }
 	
-	 protected String retornarValoresBD(Endereco endereco) {
+	 protected String retornarValoresBD(Categoria categoria) {
 		 	
 		 	return
-		        retornarValorStringBD(endereco.getCep())
+		        (categoria.getCodigoProd())
 		        + ", "
-		        + retornarValorStringBD(endereco.getUf())
-		        + ", "
-		        + retornarValorStringBD(endereco.getCidade())
-		        + ", "
-		        + retornarValorStringBD(endereco.getBairro())
-		        + ", "
-		        + retornarValorStringBD(endereco.getLogradouro());
+		        + retornarValorStringBD(categoria.getCategoria());
 	    }
 	    
 	    private String retornarValorStringBD(String valor) {
@@ -188,4 +169,6 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 	        con = null;
 	    }
 	}
+	
+
 }

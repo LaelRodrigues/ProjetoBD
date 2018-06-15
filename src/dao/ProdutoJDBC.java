@@ -1,24 +1,14 @@
 package dao;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
 import interfaceDAO.IProduto;
-import model.Loja;
 import model.Produto;
 
 public class ProdutoJDBC extends GenericDao implements IProduto {
-	
-	private String URL;
-	private String NOME;
-	private String SENHA;
-	
-	private Connection con;  
-	private Statement comando;
 	
 	public ProdutoJDBC(String server, String user, String password) {
 		super(server,user,password);
