@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="vision.CadTransportadoraController">
+  <children>
+    <Pane id="" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: whitesmoke; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+    <Pane layoutX="313.0" layoutY="34.0" prefHeight="560.0" prefWidth="770.0">
+      <children>
+        <Label layoutX="274.0" layoutY="167.0" text="Cadastro de Transportadora">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+        <TextField id="alt1" fx:id="cnpj" layoutX="15.0" layoutY="340.0" prefWidth="500.0" promptText="Digite aqui o CNPJ da Transportadora" />
+        <TextField id="alt4" fx:id="nome" layoutX="15.0" layoutY="301.0" prefWidth="500.0" promptText="Digite o nome da Transportadora" />
+        <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="381.0" prefWidth="500.0" promptText="Digite aqui o email da Transportadora" />
+        <TextField id="alt4" fx:id="cep" layoutX="14.0" layoutY="421.0" prefWidth="500.0" promptText="Digite aqui o cep da Transportadora" />
+        <Pane layoutX="556.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
+          <children>
+            <Button layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
+            <Button layoutX="41.0" layoutY="65.0" mnemonicParsing="false" onAction="#handlerCadastrarTransportadora" prefWidth="118.0" text="Cadastrar" />
+          </children>
+        </Pane>
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>

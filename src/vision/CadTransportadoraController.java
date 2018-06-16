@@ -12,35 +12,23 @@ import services.UserServices;
 import util.ScreenConstants;
 import util.ScreenLibrary;
 
-public class CadProdutoController {
+public class CadTransportadoraController {
 
 	
 	@FXML
 	private Label error;
 	
 	@FXML
-	private TextField codigo;
-	
-	@FXML
 	private TextField nome;
 	
 	@FXML
-	private TextField descricao;
+	private TextField cnpj;
 	
 	@FXML
-	private TextField preco;
+	private TextField email;
 	
 	@FXML
-	private ChoiceBox<String> cnpjForn = new ChoiceBox<String>();
-	
-	@FXML
-	private ChoiceBox<String> vdia = new ChoiceBox<String>();
-	
-	@FXML
-	private ChoiceBox<String> vmes = new ChoiceBox<String>();
-	
-	@FXML
-	private ChoiceBox<String> vano = new ChoiceBox<String>();
+	private TextField cep;
 
 	@FXML
 	private Pane background;
@@ -51,7 +39,7 @@ public class CadProdutoController {
 	
 	@FXML
 	public void initialize() {
-		cnpjForn.getItems().addAll("CNPJ 1", "CNPJ 2", "CNPJ 3", "CNPJ 4");
+		
 	}
 	
 	@FXML
@@ -59,7 +47,7 @@ public class CadProdutoController {
 	}
 	
 	@FXML
-	public void handlerCadastrarProduto(){
+	public void handlerCadastrarTransportadora(){
 		
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDHOME);
@@ -76,15 +64,5 @@ public class CadProdutoController {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public void recebeIdPergunta(long id){
-		idPerguntaRecebida = id;
-		System.out.println("ESTAMOS RECEBENDO NO CONTROLLER COM O ID: "+idPerguntaRecebida);
-		try {
-			ScreenLibrary.LoadTela(ScreenConstants.IDCADPERG);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}*/
 	
 }

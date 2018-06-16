@@ -76,10 +76,10 @@ public class ScreenBuilder {
 
 	}
 	
-	public static void renderClassico() {
+	public static void renderCadastroTransportadora() {
 
-		path = "Classico.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
-		title = "Classico"; // nome q aparece no topo da tela
+		path = "/vision/CadTransportadoraScreen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Cadastro de Transportadora"; // nome q aparece no topo da tela
 		buildScreen();
 
 	}

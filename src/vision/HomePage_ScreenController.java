@@ -39,7 +39,11 @@ public class HomePage_ScreenController {
 	
 	@FXML
 	public void handlerCadastrarTransportadora() {
-		
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDCADTRANSP);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@FXML

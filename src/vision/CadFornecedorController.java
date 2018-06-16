@@ -49,20 +49,6 @@ public class CadFornecedorController {
 	@FXML
 	public void handlerCadastrarFornecedor(){
 		
-		User user = new User();
-		
-		user.setNome("teste");
-		user.setSenha("123");
-		user.setCargo("");
-		user.setId(34.0);
-		
-		try {
-			UserServices.cadastrar(user);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} //enviando o usuário para o UserServices para cadastrar no banco
-		
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDHOME);
 		} catch (UnsupportedEncodingException e) {

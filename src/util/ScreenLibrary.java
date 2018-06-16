@@ -60,8 +60,8 @@ public class ScreenLibrary {
 		else if(id == ScreenConstants.ICADFORN)
 			ScreenBuilder.renderCadastroFornecedor();
 		
-		else if(id == ScreenConstants.CLASSIC)
-			ScreenBuilder.renderClassico();
+		else if(id == ScreenConstants.IDCADTRANSP)
+			ScreenBuilder.renderCadastroTransportadora();
 		
 		else if(id == ScreenConstants.FRIENDS)
 			ScreenBuilder.renderFriends();

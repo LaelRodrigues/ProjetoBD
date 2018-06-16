@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="vision.CadFornecedorController">
   <children>
-    <Pane onDragDetected="#handlerCadastrarFornecedor" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: whitesmoke; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+    <Pane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: whitesmoke; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
     <Pane layoutX="313.0" layoutY="34.0" prefHeight="560.0" prefWidth="770.0">
       <children>
         <Label layoutX="290.0" layoutY="167.0" text="Cadastro de Fornecedor">
@@ -28,7 +28,7 @@
         <Pane layoutX="556.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
           <children>
             <Button layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
-            <Button layoutX="41.0" layoutY="65.0" mnemonicParsing="false" prefWidth="118.0" text="Cadastrar" />
+            <Button layoutX="41.0" layoutY="65.0" mnemonicParsing="false" onAction="#handlerCadastrarFornecedor" prefWidth="118.0" text="Cadastrar" />
           </children>
         </Pane>
         <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="381.0" prefWidth="500.0" promptText="Digite aqui o email do Fornecedor" />
