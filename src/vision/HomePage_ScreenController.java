@@ -14,12 +14,6 @@ public class HomePage_ScreenController {
 	private Pane backPane;
 
 	@FXML
-	private Button novaPergunta;
-
-	@FXML
-	private Button listaPergunta;
-
-	@FXML
 	public void initialize() {
 		
 	}
@@ -33,29 +27,23 @@ public class HomePage_ScreenController {
 		}
 		
 	}
-
+	
 	@FXML
-	public void handlerListaPergunta() {
+	public void handlerCadastrarFornecedor() {
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.ICADFORN);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void handlerCadastrarTransportadora() {
 		
 	}
 	
 	@FXML
-	public void handlerCadastrarFornecedor() {
-		
-	}
-
-	@FXML
-	public void handlerContraOTempo() {
-		
-	}
-
-	@FXML
-	public void handlerClassico() {
-		
-	}
-
-	@FXML
-	public void handlerFriends() {
+	public void handlerCadastrarLoja() {
 		
 	}
 }

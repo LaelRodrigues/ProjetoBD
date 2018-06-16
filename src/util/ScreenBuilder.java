@@ -63,15 +63,15 @@ public class ScreenBuilder {
 	public static void renderCadastroProduto() {
 
 		path = "/vision/CadProdutoScreen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
-		title = "Cadastro de pergunta"; // nome q aparece no topo da tela
+		title = "Cadastro de Produto"; // nome q aparece no topo da tela
 		buildScreen();
 
 	}
 	
-	public static void renderContraOTempo() {
+	public static void renderCadastroFornecedor() {
 
-		path = "ContraOTempo_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
-		title = "Contra o Tempo"; // nome q aparece no topo da tela
+		path = "/vision/CadFornecedorScreen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Cadastro de Fornecedor"; // nome q aparece no topo da tela
 		buildScreen();
 
 	}

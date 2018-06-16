@@ -18,7 +18,7 @@
     <Pane prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: whitesmoke; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
     <Pane layoutX="313.0" layoutY="34.0" prefHeight="560.0" prefWidth="770.0">
       <children>
-        <Label layoutX="349.0" layoutY="172.0" text="Produto">
+        <Label layoutX="303.0" layoutY="167.0" text="Cadastro de Produto">
           <font>
             <Font size="18.0" />
           </font>

@@ -13,13 +13,11 @@
       <children>
         <Pane fx:id="backPane" layoutX="25.0" layoutY="25.0" prefHeight="718.0" prefWidth="1316.0" style="-fx-border-color: lightgrey; -fx-background-color: whitesmoke;">
           <children>
-            <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlerCadastrarProduto" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Usuario" />
-            <Button layoutX="447.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlerClassico" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Produto" />
-            <Button layoutX="880.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlerFriends" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Fornecedor" />
-            <Button id="novaPergunta" layoutX="14.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Nova pergunta" />
-            <Button fx:id="listaPergunta" layoutX="234.0" layoutY="204.0" mnemonicParsing="false" onAction="#handlerListaPergunta" prefHeight="25.0" prefWidth="200.0" text="Editar perguntas" />
-            <Button layoutX="15.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerClassico" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Transportadora" />
-            <Button layoutX="449.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerClassico" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Loja" />
+            <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Usuario" />
+            <Button layoutX="447.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlerCadastrarProduto" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Produto" />
+            <Button layoutX="880.0" layoutY="15.0" mnemonicParsing="false" onAction="#handlerCadastrarFornecedor" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Fornecedor" />
+            <Button layoutX="15.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerCadastrarTransportadora" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Transportadora" />
+            <Button layoutX="449.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerCadastrarLoja" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Loja" />
           </children>
         </Pane>
       </children>
