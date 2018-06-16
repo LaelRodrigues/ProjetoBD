@@ -35,17 +35,25 @@ public class UserDao extends GenericDao implements IUser{
 
 	@Override
 	public void inserir(User user) {
-		// TODO Auto-generated method stub
-		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO User (");
-        buffer.append(this.retornarCamposBD());
-        buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(user));
-        buffer.append(")");
-        String sql = buffer.toString();
 
     	try {
 			conectar();
+			
+			StringBuffer buffer = new StringBuffer();
+	        buffer.append("INSERT INTO User (");
+	        buffer.append(this.retornarCamposBD());
+	        buffer.append(") VALUES (");
+	        buffer.append(this.retornarValoresBD(user));
+	        buffer.append(")");
+	        String sql = buffer.toString();
+			
+			try {
+				int id = con.createStatement().getGeneratedKeys().getInt(1);
+				System.out.println(" id xxx " + id);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			
     		comando.execute(sql);
     		//System.out.println("estou aqui");
 		} catch (ClassNotFoundException e) {
@@ -62,11 +70,11 @@ public class UserDao extends GenericDao implements IUser{
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM User WHERE id=" + id;
+            String sql = "SELECT * FROM User WHERE idUser=" + id;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
                 	//user.setCnpj(rs.getString("cnpjLoja"));
-                	user.setId(new Double (rs.getString("id")));
+                	user.setId(new Double (rs.getString("idUser")));
                 	user.setNome(rs.getString("nome"));
                 	user.setSenha(rs.getString("senha"));
                 	user.setCargo(rs.getString("cargo"));
@@ -89,11 +97,11 @@ public class UserDao extends GenericDao implements IUser{
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM User WHERE nome=" + nome;
+            String sql = "SELECT * FROM User WHERE nome = '" + nome + "'";
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
                 	//user.setCnpj(rs.getString("cnpjLoja"));
-                	user.setId(new Double (rs.getString("id")));
+                	user.setId(new Double (rs.getString("idUser")));
                 	user.setNome(rs.getString("nome"));
                 	user.setSenha(rs.getString("senha"));
                 	user.setCargo(rs.getString("cargo"));
@@ -112,7 +120,7 @@ public class UserDao extends GenericDao implements IUser{
 
 	@Override
 	public void remover(User user) {
-    	String sql ="DELETE FROM User WHERE id=" + user.getId() + ";";
+    	String sql ="DELETE FROM User WHERE idUser=" + user.getId() + ";";
     	System.out.println(user.getId());
     	try {
 			conectar();
@@ -131,13 +139,13 @@ public class UserDao extends GenericDao implements IUser{
 	}
 	
 	protected String retornarCamposBD() {
-    	return "id, nome, senha, cargo";
+    	return "idUser, nome, senha, cargo";
     }
 	
 	protected String returnFieldValuesBD(User user) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("id=");
+        buffer.append("idUser=");
         buffer.append(retornarValorStringBD(user.getId()));
         buffer.append(", nome=");
         buffer.append(retornarValorStringBD(user.getNome()));

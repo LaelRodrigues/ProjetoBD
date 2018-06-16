@@ -26,6 +26,11 @@ public class DaoInfo {
 		SENHA = senha;
 	}
 	
+	public static void set(String newUrl, String newNome, String newSenha){
+		URL = newUrl;
+		NOME = newNome;
+		SENHA = newSenha;
+	}
 	
 
 }

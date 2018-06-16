@@ -54,7 +54,7 @@ public class ScreenBuilder {
 	
 	public static void renderHomePage() {
 
-		path = "HomePage_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		path = "/vision/HomePage_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
 		title = "Home"; // nome q aparece no topo da tela
 		buildScreen();
 
