@@ -1,7 +1,10 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -46,15 +49,29 @@ public class UserDao extends GenericDao implements IUser{
 	        buffer.append(this.retornarValoresBD(user));
 	        buffer.append(")");
 	        String sql = buffer.toString();
+	        
+	        /*
+			ResultSet rs = comando.executeQuery("select * from user");
+			ResultSetMetaData metadata = rs.getMetaData();
+		    if (metadata.isAutoIncrement(1)) {
+		      System.out.println("Column ID is an auto-increment column");
+		    }*/
+	        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        ps.executeUpdate();
+	        
+	        //comando = con.createStatement();
+	        //comando.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+	        
+	        //System.out.println(" id = " + ps.getGeneratedKeys().getInt(1));
 			
-			try {
+	        /*try {
 				int id = con.createStatement().getGeneratedKeys().getInt(1);
 				System.out.println(" id xxx " + id);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
-			}
+			}*/
 			
-    		comando.execute(sql);
+    		//comando.execute(sql);
     		//System.out.println("estou aqui");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
