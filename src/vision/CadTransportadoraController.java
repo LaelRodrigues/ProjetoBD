@@ -22,6 +22,9 @@ public class CadTransportadoraController {
 	private TextField nome;
 	
 	@FXML
+	private TextField telefone;
+	
+	@FXML
 	private TextField cnpj;
 	
 	@FXML

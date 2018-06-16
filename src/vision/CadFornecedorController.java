@@ -3,12 +3,9 @@ package vision;
 import java.io.UnsupportedEncodingException;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import model.User;
-import services.UserServices;
 import util.ScreenConstants;
 import util.ScreenLibrary;
 
@@ -20,6 +17,9 @@ public class CadFornecedorController {
 	
 	@FXML
 	private TextField nome;
+
+	@FXML
+	private TextField telefone;
 	
 	@FXML
 	private TextField cnpj;

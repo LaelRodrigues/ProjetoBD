@@ -27,6 +27,7 @@
         <TextField id="alt4" fx:id="nome" layoutX="15.0" layoutY="301.0" prefWidth="500.0" promptText="Digite o nome da Transportadora" />
         <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="381.0" prefWidth="500.0" promptText="Digite aqui o email da Transportadora" />
         <TextField id="alt4" fx:id="cep" layoutX="14.0" layoutY="421.0" prefWidth="500.0" promptText="Digite aqui o cep da Transportadora" />
+        <TextField id="alt4" fx:id="telefone" layoutX="15.0" layoutY="461.0" prefWidth="500.0" promptText="Digite aqui o telefone da Transportadora" />
         <Pane layoutX="556.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
           <children>
             <Button layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
