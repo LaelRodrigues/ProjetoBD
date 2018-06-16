@@ -1,8 +1,12 @@
 package vision;
 
+import java.io.UnsupportedEncodingException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import util.ScreenConstants;
+import util.ScreenLibrary;
 
 public class HomePage_ScreenController {
 
@@ -21,12 +25,22 @@ public class HomePage_ScreenController {
 	}
 
 	@FXML
-	public void handlerNovaPergunta() {
+	public void handlerCadastrarProduto() {
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDCADPROD);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		
 	}
 
 	@FXML
 	public void handlerListaPergunta() {
+		
+	}
+	
+	@FXML
+	public void handlerCadastrarFornecedor() {
 		
 	}
 

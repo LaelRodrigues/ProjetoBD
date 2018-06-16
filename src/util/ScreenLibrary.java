@@ -54,8 +54,8 @@ public class ScreenLibrary {
 		else if(id == ScreenConstants.IDHOME)
 			ScreenBuilder.renderHomePage();
 		
-		else if(id == ScreenConstants.IDCADPERG)
-			ScreenBuilder.renderCadastroPergunta();
+		else if(id == ScreenConstants.IDCADPROD)
+			ScreenBuilder.renderCadastroProduto();
 		
 		else if(id == ScreenConstants.IDAGAINSTTIME)
 			ScreenBuilder.renderContraOTempo();
