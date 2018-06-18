@@ -1,27 +1,25 @@
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import conexao.ConFactory;
-import interfaceDAO.ILoja;
-import model.Loja;
+import interfaceDAO.ITelefone;
+import model.Telefone;
 
-public class LojaJDBC extends GenericDao implements ILoja {
+public class TelefoneJDBC extends GenericDao implements ITelefone {
 	
-	public LojaJDBC(){
+	public TelefoneJDBC(){
 		super();
 	}
 
 	@Override
-	public void atualizar(Loja loja) {
+	public void atualizar(Telefone telefone) {
 		
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("UPDATE Loja SET ");
-        buffer.append(returnFieldValuesBD(loja));
-        buffer.append(" WHERE cnpjLoja=");
-        buffer.append(loja.getCnpj());
+        buffer.append("UPDATE Telefone SET ");
+        buffer.append(returnFieldValuesBD(telefone));
+        buffer.append(" WHERE telefone=");
+        buffer.append(telefone.getTelefone());
         String sql = buffer.toString();
         
     	try {
@@ -36,12 +34,12 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	}
 
 	@Override
-	public void inserir(Loja loja) {
+	public void inserir(Telefone telefone) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Loja (");
+        buffer.append("INSERT INTO Telefone (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(loja));
+        buffer.append(this.retornarValoresBD(telefone));
         buffer.append(")");
         String sql = buffer.toString();
 
@@ -56,34 +54,9 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	}
 
 	@Override
-	public Loja buscar(String cnpj) {
-		
-		Loja loja = new Loja();
-
-		try {
-			conectar();
-            String sql = "SELECT * FROM Loja WHERE cnpjLoja=" + cnpj;
-                ResultSet rs = comando.executeQuery(sql);
-                if (rs.next()) {
-                	loja.setCnpj(rs.getString("cnpjLoja"));
-    				loja.setNome(rs.getString("nome"));
-    				loja.setEmail(rs.getString("email"));
-    				loja.setCepLoja(rs.getString("cepLoja"));
-    				System.out.println(loja.getNome());
-                }
-            
-        } catch (SQLException SQLe) {
-            SQLe.printStackTrace();
-        } catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-        return loja;
-	}
-
-	@Override
-	public void remover(Loja loja) {
-    	String sql ="DELETE FROM Loja WHERE cnpjLoja=" + loja.getCnpj() + ";";
-    	System.out.println(loja.getCnpj());
+	public void remover(Telefone telefone) {
+    	String sql ="DELETE FROM Telefone WHERE telefone=" + telefone.getTelefone() + ";";
+    	System.out.println(telefone.getTelefone());
     	try {
 			conectar();
     		comando.execute(sql);
@@ -93,41 +66,28 @@ public class LojaJDBC extends GenericDao implements ILoja {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public List<Loja> listarLojas() {
-		return null;
-	}
 	
 	protected String retornarCamposBD() {
-    	return "cnpjLoja, nome, email, cepLoja";
+    	return "telefone, cnpj";
     }
 	
-	protected String returnFieldValuesBD(Loja loja) {
+	protected String returnFieldValuesBD(Telefone telefone) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("cnpjLoja=");
-        buffer.append(retornarValorStringBD(loja.getCnpj()));
-        buffer.append(", nome=");
-        buffer.append(retornarValorStringBD(loja.getNome()));
-        buffer.append(", email=");
-        buffer.append(retornarValorStringBD(loja.getEmail()));
-        buffer.append(", cepLoja=");
-        buffer.append(retornarValorStringBD(loja.getCepLoja()));
+        buffer.append("telefone=");
+        buffer.append(retornarValorStringBD(telefone.getTelefone()));
+        buffer.append(", cnpj=");
+        buffer.append(retornarValorStringBD(telefone.getCnpj()));
 
         return buffer.toString();
     }
 	
-	 protected String retornarValoresBD(Loja loja) {
+	 protected String retornarValoresBD(Telefone telefone) {
 		 	
 		 	return
-		        retornarValorStringBD(loja.getCnpj())
+		        retornarValorStringBD(telefone.getTelefone())
 		        + ", "
-		        + retornarValorStringBD(loja.getNome())
-		        + ", "
-		        + retornarValorStringBD(loja.getEmail())
-		        + ", "
-		        + retornarValorStringBD(loja.getCepLoja());
+		        + retornarValorStringBD(telefone.getCnpj());
 	    }
 	    
 	    private String retornarValorStringBD(String valor) {

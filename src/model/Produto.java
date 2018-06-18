@@ -11,7 +11,14 @@ public class Produto {
 	private Float preco;
 	private String forneCnpj;
 	
-	public Produto() {	
+	public Produto() {
+		this.codigo = null;
+		this.nome = null;
+		this.descricao = null;
+		this.d_validade = null;
+		this.preco = null;
+		this.forneCnpj = null;
+		
 	}
 	
 	public Produto(Integer codigo, String nome, String descricao, Date d_validade, Float preco, String forneCnpj) {

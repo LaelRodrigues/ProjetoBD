@@ -5,23 +5,23 @@ import java.sql.SQLException;
 import java.util.List;
 
 import conexao.ConFactory;
-import interfaceDAO.ILoja;
-import model.Loja;
+import interfaceDAO.IPedido;
+import model.Pedido;
 
-public class LojaJDBC extends GenericDao implements ILoja {
+public class PedidoJDBC extends GenericDao implements IPedido {
 	
-	public LojaJDBC(){
+	public PedidoJDBC(){
 		super();
 	}
 
 	@Override
-	public void atualizar(Loja loja) {
+	public void atualizar(Pedido pedido) {
 		
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("UPDATE Loja SET ");
-        buffer.append(returnFieldValuesBD(loja));
-        buffer.append(" WHERE cnpjLoja=");
-        buffer.append(loja.getCnpj());
+        buffer.append("UPDATE Pedido SET ");
+        buffer.append(returnFieldValuesBD(pedido));
+        buffer.append(" WHERE idPedido=");
+        buffer.append(pedido.getIdPedido());
         String sql = buffer.toString();
         
     	try {
@@ -36,18 +36,19 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	}
 
 	@Override
-	public void inserir(Loja loja) {
+	public void inserir(Pedido pedido) {
 		StringBuffer buffer = new StringBuffer();
-        buffer.append("INSERT INTO Loja (");
+        buffer.append("INSERT INTO Pedido (");
         buffer.append(this.retornarCamposBD());
         buffer.append(") VALUES (");
-        buffer.append(this.retornarValoresBD(loja));
+        buffer.append(this.retornarValoresBD(pedido));
         buffer.append(")");
         String sql = buffer.toString();
 
     	try {
 			conectar();
     		comando.execute(sql);
+    		System.out.println("estou aqui");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -56,20 +57,20 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	}
 
 	@Override
-	public Loja buscar(String cnpj) {
+	public Pedido buscar(Integer idPedido) {
 		
-		Loja loja = new Loja();
+		Pedido pedido = new Pedido();
 
 		try {
 			conectar();
-            String sql = "SELECT * FROM Loja WHERE cnpjLoja=" + cnpj;
+            String sql = "SELECT * FROM Pedido WHERE idPedido=" + idPedido;
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
-                	loja.setCnpj(rs.getString("cnpjLoja"));
-    				loja.setNome(rs.getString("nome"));
-    				loja.setEmail(rs.getString("email"));
-    				loja.setCepLoja(rs.getString("cepLoja"));
-    				System.out.println(loja.getNome());
+                	pedido.setIdPedido(rs.getInt("idPedido"));
+    				pedido.setCnpjLoja(rs.getString("cnpjLoja"));
+    				pedido.setCnpjForne(rs.getString("cnpjForne"));
+    				pedido.setCnpjTrans(rs.getString("cnpjTrans"));
+    				System.out.println(pedido.getIdPedido());
                 }
             
         } catch (SQLException SQLe) {
@@ -77,13 +78,14 @@ public class LojaJDBC extends GenericDao implements ILoja {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-        return loja;
+        return pedido;
 	}
 
 	@Override
-	public void remover(Loja loja) {
-    	String sql ="DELETE FROM Loja WHERE cnpjLoja=" + loja.getCnpj() + ";";
-    	System.out.println(loja.getCnpj());
+	public void remover(Pedido pedido) {
+    	
+		String sql ="DELETE FROM Pedido WHERE idPedido=" + pedido.getIdPedido() + ";";
+    	System.out.println(pedido.getIdPedido());
     	try {
 			conectar();
     		comando.execute(sql);
@@ -95,39 +97,39 @@ public class LojaJDBC extends GenericDao implements ILoja {
 	}
 
 	@Override
-	public List<Loja> listarLojas() {
+	public List<Pedido> listarPedidos() {
 		return null;
 	}
 	
 	protected String retornarCamposBD() {
-    	return "cnpjLoja, nome, email, cepLoja";
+    	return "idPedido, cnpjLoja, cnpjForne, cnpjTrans";
     }
 	
-	protected String returnFieldValuesBD(Loja loja) {
+	protected String returnFieldValuesBD(Pedido pedido) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("cnpjLoja=");
-        buffer.append(retornarValorStringBD(loja.getCnpj()));
-        buffer.append(", nome=");
-        buffer.append(retornarValorStringBD(loja.getNome()));
-        buffer.append(", email=");
-        buffer.append(retornarValorStringBD(loja.getEmail()));
-        buffer.append(", cepLoja=");
-        buffer.append(retornarValorStringBD(loja.getCepLoja()));
+        buffer.append("idPedido=");
+        buffer.append(pedido.getIdPedido());
+        buffer.append(", cnpjLoja=");
+        buffer.append(retornarValorStringBD(pedido.getCnpjLoja()));
+        buffer.append(", cnpjForne=");
+        buffer.append(retornarValorStringBD(pedido.getCnpjForne()));
+        buffer.append(", cnpjTrans=");
+        buffer.append(retornarValorStringBD(pedido.getCnpjTrans()));
 
         return buffer.toString();
     }
 	
-	 protected String retornarValoresBD(Loja loja) {
+	 protected String retornarValoresBD(Pedido pedido) {
 		 	
 		 	return
-		        retornarValorStringBD(loja.getCnpj())
+		        (pedido.getIdPedido())
 		        + ", "
-		        + retornarValorStringBD(loja.getNome())
+		        + retornarValorStringBD(pedido.getCnpjLoja())
 		        + ", "
-		        + retornarValorStringBD(loja.getEmail())
+		        + retornarValorStringBD(pedido.getCnpjForne())
 		        + ", "
-		        + retornarValorStringBD(loja.getCepLoja());
+		        + retornarValorStringBD(pedido.getCnpjTrans());
 	    }
 	    
 	    private String retornarValorStringBD(String valor) {

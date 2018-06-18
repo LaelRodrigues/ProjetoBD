@@ -8,7 +8,13 @@ public class Endereco {
 	private String bairro;
 	private String logradouro;
 	
-	public Endereco() {}
+	public Endereco() {
+		this.cep = null;
+		this.uf = null;
+		this.cidade = null;
+		this.bairro = null;
+		this.logradouro = null;
+	}
 	
 	public Endereco(String cep, String uf, String cidade, String bairro, String logradouro) {
 		super();

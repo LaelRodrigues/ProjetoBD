@@ -7,7 +7,12 @@ public class Loja {
 	private String email;
 	private String cepLoja;
 	
-	public Loja() {}
+	public Loja() {
+		this.cnpj = null;
+		this.nome = null;
+		this.email = null;
+		this.cepLoja = null;
+	}
 	
 	public Loja(String cnpj, String nome, String email, String cepLoja) {
 		this.cnpj = cnpj;
