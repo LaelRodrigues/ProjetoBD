@@ -29,7 +29,9 @@
         <TextField id="alt4" fx:id="cep" layoutX="14.0" layoutY="421.0" prefWidth="500.0" promptText="Digite aqui o cep do Fornecedor" />
         <TextField id="alt4" fx:id="telefone" layoutX="15.0" layoutY="461.0" prefWidth="500.0" promptText="Digite aqui o telefone do Fornecedor" />
         <Pane layoutX="556.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
+                    <Pane fx:id="cadPane" layoutX="14.0" layoutY="14.0" prefHeight="250.0" prefWidth="810.0" style="-fx-background-color: white;" />
           <children>
+          <Button fx:id="cad" layoutX="75.0" layoutY="340.0" mnemonicParsing="false" onAction="#CadastroHandler" prefWidth="150.0" text="Cadastrar cep" />
             <Button layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
             <Button layoutX="41.0" layoutY="65.0" mnemonicParsing="false" onAction="#handlerCadastrarFornecedor" prefWidth="118.0" text="Cadastrar" />
           </children>

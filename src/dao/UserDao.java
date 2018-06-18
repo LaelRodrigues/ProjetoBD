@@ -50,14 +50,6 @@ public class UserDao extends GenericDao implements IUser{
 	        buffer.append(")");
 	        String sql = buffer.toString();
 	        
-	        /*
-			ResultSet rs = comando.executeQuery("select * from user");
-			ResultSetMetaData metadata = rs.getMetaData();
-		    if (metadata.isAutoIncrement(1)) {
-		      System.out.println("Column ID is an auto-increment column");
-		    }*/
-	        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-	        ps.executeUpdate();
 	        
 	        //comando = con.createStatement();
 	        //comando.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
@@ -71,41 +63,13 @@ public class UserDao extends GenericDao implements IUser{
 				e1.printStackTrace();
 			}*/
 			
-    		//comando.execute(sql);
+    		comando.execute(sql);
     		//System.out.println("estou aqui");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public User buscar(Double id) {
-		// TODO Auto-generated method stub
-		User user = new User();
-
-		try {
-			conectar();
-            String sql = "SELECT * FROM User WHERE idUser=" + id;
-                ResultSet rs = comando.executeQuery(sql);
-                if (rs.next()) {
-                	//user.setCnpj(rs.getString("cnpjLoja"));
-                	user.setId(new Double (rs.getString("idUser")));
-                	user.setNome(rs.getString("nome"));
-                	user.setSenha(rs.getString("senha"));
-                	user.setCargo(rs.getString("cargo"));
-    				//user.setEmail(rs.getString("email"));
-    				//user.setCepLoja(rs.getString("cepLoja"));
-    				System.out.println(user.getNome());
-                }
-            
-        } catch (SQLException SQLe) {
-            SQLe.printStackTrace();
-        } catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-        return user;
 	}
 	
 	public User buscar(String nome) {
@@ -118,7 +82,6 @@ public class UserDao extends GenericDao implements IUser{
                 ResultSet rs = comando.executeQuery(sql);
                 if (rs.next()) {
                 	//user.setCnpj(rs.getString("cnpjLoja"));
-                	user.setId(new Double (rs.getString("idUser")));
                 	user.setNome(rs.getString("nome"));
                 	user.setSenha(rs.getString("senha"));
                 	user.setCargo(rs.getString("cargo"));
@@ -156,14 +119,12 @@ public class UserDao extends GenericDao implements IUser{
 	}
 	
 	protected String retornarCamposBD() {
-    	return "idUser, nome, senha, cargo";
+    	return "nome, senha, cargo";
     }
 	
 	protected String returnFieldValuesBD(User user) {
 		
         StringBuffer buffer = new StringBuffer();
-        buffer.append("idUser=");
-        buffer.append(retornarValorStringBD(user.getId()));
         buffer.append(", nome=");
         buffer.append(retornarValorStringBD(user.getNome()));
         buffer.append(", senha=");
@@ -177,9 +138,7 @@ public class UserDao extends GenericDao implements IUser{
 	 protected String retornarValoresBD(User user) {
 		 	
 		 	return
-		        retornarValorStringBD(user.getId())
-		        + ", "
-		        + retornarValorStringBD(user.getNome())
+		        retornarValorStringBD(user.getNome())
 		        + ", "
 		        + retornarValorStringBD(user.getSenha())
 		        + ", "

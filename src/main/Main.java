@@ -10,7 +10,7 @@ import util.ScreenConstants;
 
 public class Main extends Application{
 	public static void main(String[] args)  throws Exception {
-		DaoInfo.set("jdbc:mysql://localhost/Estoque", "root", "samuca1996");
+		DaoInfo.set("jdbc:mysql://localhost/Estoque", "aluno", "aluno");
 		launch(args);
 		
 	}

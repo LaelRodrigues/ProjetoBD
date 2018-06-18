@@ -10,7 +10,7 @@ import model.Fornecedor;
 
 public class FornecedorJDBC extends GenericDao implements IFornecedor {
 	
-	public FornecedorJDBC() throws SQLException {
+	public FornecedorJDBC() {
 	}
 
 	@Override

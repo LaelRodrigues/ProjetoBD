@@ -40,7 +40,7 @@ public class UserServices {
 			if (userDao.buscar(novo.getNome()).getNome() == null) {
 				System.out.println("inserido " + novo.getNome() + " " + novo.getSenha() + " " + novo.getCargo());
 				userDao.inserir(novo);
-				//userDao.commit();
+				userDao.commit();
 			} else{
 				System.out.println("usuario ja cadastrado");
 				throw new Exception("usuario ja cadastrado");
