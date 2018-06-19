@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -96,7 +97,29 @@ public class LojaJDBC extends GenericDao implements ILoja {
 
 	@Override
 	public List<Loja> listarLojas() {
-		return null;
+
+		List<Loja> listaLojas = new ArrayList<Loja>();
+		Loja loja;
+		
+		try{
+			conectar();
+			String sql = "SELECT * FROM Loja";
+            ResultSet rs = comando.executeQuery(sql);
+            
+            while(rs.next()) {
+            	loja = new Loja();
+            	loja.setCnpj(rs.getString("cnpjLoja"));
+            	loja.setNome(rs.getString("nome"));
+            	loja.setEmail(rs.getString("email"));
+            	loja.setCepLoja(rs.getString("cepLoja"));
+            	listaLojas.add(loja);
+            }
+		} catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return listaLojas;
 	}
 	
 	protected String retornarCamposBD() {

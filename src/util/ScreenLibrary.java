@@ -63,11 +63,8 @@ public class ScreenLibrary {
 		else if(id == ScreenConstants.IDCADTRANSP)
 			ScreenBuilder.renderCadastroTransportadora();
 		
-		else if(id == ScreenConstants.FRIENDS)
-			ScreenBuilder.renderFriends();
-		
-		else if(id == ScreenConstants.LISTPERG)
-			ScreenBuilder.renderListPerg();
+		else if(id == ScreenConstants.IDCADLOJA)
+			ScreenBuilder.renderCadastroLoja();
 		
 		
 		else throw new UnsupportedEncodingException("tela indefida");

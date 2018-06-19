@@ -14,7 +14,6 @@ public class UserServices {
 	}
 
 	public static void cadastrar(User novo) throws Exception {
-		System.out.println(novo.getNome() + " " + novo.getSenha() + " " + novo.getCargo());
 
 		if (novo.getNome().length() == 0) {
 			System.out.println("1");

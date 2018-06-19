@@ -69,8 +69,6 @@ public class Login_ScreenController {
 	@FXML
 	public void LoginHandler() throws UnsupportedEncodingException {
 
-		System.out.println(user.getText() + " " + pass.getText());
-
 		if (UserServices.login(user.getText(), pass.getText()))
 			SceneBuilder.LoadScreen(ScreenConstants.IDHOME);
 		else {

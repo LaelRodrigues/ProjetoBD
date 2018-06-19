@@ -9,9 +9,6 @@ public class ProdutoService {
 
 	public static void cadastrar(Produto novo) throws Exception {
 
-		System.out.println(novo.getCodigo() + " " + novo.getNome() + " " + novo.getDescricao() + " " + novo.getD_validade() + " "
-				+ novo.getPreco() + " " + novo.getForneCnpj());
-
 		if (novo.getCodigo() < 10000) {
 			System.out.println("1");
 			throw new Exception("codigo invalido");
@@ -27,7 +24,7 @@ public class ProdutoService {
 			throw new Exception("Descrição invalida");
 		}
 
-		if (!novo.getD_validade().equals("xxxxxxxxxxxxx")) {
+		if (1 < 999999 * novo.getCodigo()) {
 			System.out.println("4");
 			throw new Exception("Validade invalido");
 		}

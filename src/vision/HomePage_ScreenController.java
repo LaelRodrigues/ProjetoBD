@@ -3,7 +3,6 @@ package vision;
 import java.io.UnsupportedEncodingException;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import util.ScreenConstants;
 import util.ScreenLibrary;
@@ -48,6 +47,10 @@ public class HomePage_ScreenController {
 	
 	@FXML
 	public void handlerCadastrarLoja() {
-		
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDCADLOJA);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

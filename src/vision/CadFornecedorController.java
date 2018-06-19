@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import model.Endereco;
 import model.Fornecedor;
 import services.EnderecoService;
-import services.FornecedorServices;
+import services.FornecedorService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
 
@@ -77,7 +77,7 @@ public class CadFornecedorController {
 
 		try {
 			try {
-				FornecedorServices.cadastrar(novo);
+				FornecedorService.cadastrar(novo);
 			} catch (Exception e) {
 				EnderecoService.deletar(novoend);
 				error.setText("incapaz de cadastrar fornecedor");

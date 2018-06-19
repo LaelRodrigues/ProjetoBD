@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import model.Produto;
-import services.FornecedorServices;
+import services.FornecedorService;
 import services.ProdutoService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
@@ -50,7 +50,7 @@ public class CadProdutoController {
 	@FXML
 	public void initialize() {
 		
-		List<String> cnpjFornecedores = FornecedorServices.getList();
+		List<String> cnpjFornecedores = FornecedorService.getList();
 		cnpjForn.getItems().addAll(cnpjFornecedores);
 	}
 	

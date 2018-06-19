@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -10,7 +11,7 @@ import model.Transportadora;
 
 public class TransportadoraJDBC extends GenericDao implements ITransportadora {
 	
-	public TransportadoraJDBC() throws SQLException {
+	public TransportadoraJDBC() {
 		super();
 	}
 
@@ -97,7 +98,30 @@ public class TransportadoraJDBC extends GenericDao implements ITransportadora {
 
 	@Override
 	public List<Transportadora> listarTransportadoras() {
-		return null;
+		
+		List<Transportadora> listaTransportador = new ArrayList<Transportadora>();
+		
+		Transportadora transportador ;
+		
+		try{
+			conectar();
+			String sql = "SELECT * FROM Transportadora";
+            ResultSet rs = comando.executeQuery(sql);
+            
+            while(rs.next()) {
+            	transportador = new Transportadora();
+            	transportador.setCnpj(rs.getString("cnpjTrans"));
+            	transportador.setNome(rs.getString("nome"));
+            	transportador.setEmail(rs.getString("email"));
+            	transportador.setCepTransportadora(rs.getString("cepTrans"));
+            	listaTransportador.add(transportador);
+            }
+		} catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return listaTransportador;
 	}
 	
 	protected String retornarCamposBD() {

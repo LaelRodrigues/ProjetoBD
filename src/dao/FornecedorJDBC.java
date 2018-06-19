@@ -102,14 +102,15 @@ public class FornecedorJDBC extends GenericDao implements IFornecedor {
 	public List<Fornecedor> listarFornecedores() {
 		
 		List <Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
-		Fornecedor fornecedor = new Fornecedor();
 
+		Fornecedor fornecedor ;
 		try {
 			conectar();
             String sql = "SELECT * FROM Fornecedor";
                 ResultSet rs = comando.executeQuery(sql);
                 
                 while(rs.next()) {
+                	fornecedor = new Fornecedor();
                 	fornecedor.setCnpj(rs.getString("cnpjForne"));
                 	fornecedor.setNome(rs.getString("nome"));
                 	fornecedor.setEmail(rs.getString("email"));
@@ -122,7 +123,7 @@ public class FornecedorJDBC extends GenericDao implements IFornecedor {
         } catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return listaFornecedor;
 	}
 	
 	protected String retornarCamposBD() {

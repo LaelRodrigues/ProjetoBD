@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vision.CadLojaController">
+  <children>
+    <Pane id="" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: whitesmoke; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+    <Pane layoutX="313.0" layoutY="34.0" prefHeight="560.0" prefWidth="770.0">
+      <children>
+        <Label layoutX="274.0" layoutY="42.0" text="Cadastro de Transportadora">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+        <TextField id="alt4" fx:id="nome" layoutX="15.0" layoutY="176.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite o nome da Loja" />
+        <TextField id="alt1" fx:id="cnpj" layoutX="15.0" layoutY="215.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o CNPJ da Loja" />
+        <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="256.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o email da Loja" />
+        <TextField id="alt4" fx:id="telefone" layoutX="14.0" layoutY="296.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o telefone da Loja" />
+            <TextField id="alt4" fx:id="cep" layoutX="15.0" layoutY="334.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o cep da Loja" />
+            <TextField id="alt4" fx:id="uf" layoutX="15.0" layoutY="374.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o estado da Loja" />
+            <TextField id="alt4" fx:id="cidade" layoutX="15.0" layoutY="414.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui a cidade da Loja" />
+            <TextField id="alt4" fx:id="bairro" layoutX="15.0" layoutY="454.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o bairro da Loja" />
+            <TextField id="alt4" fx:id="logradouro" layoutX="15.0" layoutY="494.0" onAction="#handlerCadastraLoja" prefWidth="500.0" promptText="Digite aqui o logradouro da Loja" />
+        <Pane layoutX="556.0" layoutY="270.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
+          <children>
+            <Button layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
+            <Button layoutX="41.0" layoutY="65.0" mnemonicParsing="false" onAction="#handlerCadastraLoja" prefWidth="118.0" text="Cadastrar" />
+          </children>
+        </Pane>
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>

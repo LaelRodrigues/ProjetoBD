@@ -6,7 +6,7 @@ import java.util.List;
 import dao.FornecedorJDBC;
 import model.Fornecedor;
 
-public class FornecedorServices {
+public class FornecedorService {
 
 	private static FornecedorJDBC fornecedorDao = new FornecedorJDBC();
 
@@ -62,11 +62,12 @@ public class FornecedorServices {
 	
 	public static List<String> getList(){
 		
-		List <Fornecedor> fornecedores = fornecedorDao.listarFornecedores(); 
+		List <Fornecedor> fornecedores = new ArrayList<Fornecedor>(); 
+		fornecedores = fornecedorDao.listarFornecedores(); 
+		
 		List <String> cnpjForn = new ArrayList<String>();
 		
 		for(int i = 0; i < fornecedores.size(); i++){
-			System.out.println("Inserindo: "+fornecedores.get(i).getCnpj());
 			cnpjForn.add(fornecedores.get(i).getCnpj());
 		}
 		

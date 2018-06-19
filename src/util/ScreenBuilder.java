@@ -84,18 +84,10 @@ public class ScreenBuilder {
 
 	}
 	
-	public static void renderFriends() {
+	public static void renderCadastroLoja() {
 
-		path = "Friend_Screen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
-		title = "Lista de amigos"; // nome q aparece no topo da tela
-		buildScreen();
-
-	}
-	
-	public static void renderListPerg() {
-
-		path = "ListQuestions.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
-		title = "Suas Perguntas"; // nome q aparece no topo da tela
+		path = "/vision/CadLoja.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Cadastrod de loja"; // nome q aparece no topo da tela
 		buildScreen();
 
 	}
