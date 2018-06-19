@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.IProduto;
@@ -70,7 +71,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
     				produto.setNome(rs.getString("nome"));
     				produto.setDescricao(rs.getString("descricao"));
     				produto.setD_validade(rs.getDate("cepLoja"));
-    				produto.setForneCnpj(rs.getString("forneCnpj"));
+    				produto.setForneCnpj(rs.getString("ForneCnpj"));
     				System.out.println(produto.getNome());
                 }
             
@@ -99,11 +100,52 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
 
 	@Override
 	public List<Produto> listarLojas() {
-		return null;
+		synchronized (this) {
+	        ResultSet rs = null;
+	            
+	        List<Produto> produtos = new Vector<Produto>();
+		        try {
+		        	conectar();
+					
+		            try {
+		                rs = comando.executeQuery("SELECT * FROM Produto");
+		                while (rs.next()) {
+		                	Produto prod = new Produto();
+		                	prod.setCodigo(rs.getInt("codigo"));
+		    				prod.setNome(rs.getString("nome"));
+		    				prod.setDescricao(rs.getString("descricao"));
+		    				prod.setD_validade(rs.getDate("d_validade"));
+		    				prod.setPreco(rs.getFloat("preco"));
+		    				prod.setForneCnpj(rs.getString("ForneCnpj"));
+		                    produtos.add(prod);
+		                }
+		            } finally {
+	        			if (rs != null) {
+	        				try {
+	        					rs.close();
+	        				} catch (SQLException sqlEx) { 
+	        				} 
+	        				rs = null;
+	        			}
+	        			if (comando != null) {
+	        				try {
+	        					comando.close();
+	        				} catch (SQLException sqlEx) { 
+	        				}
+	        				comando = null;
+	        			}
+		            }
+		        } catch (SQLException SQLe) {
+		            SQLe.printStackTrace();
+		        } catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+		        return produtos;
+	        }
 	}
 	
 	protected String retornarCamposBD() {
-    	return "codigo, nome, descricao, d_validade, preco, forneCnpj";
+    	return "codigo, nome, descricao, d_validade, preco, ForneCnpj";
     }
 	
 	protected String returnFieldValuesBD(Produto produto) {
@@ -119,7 +161,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
         buffer.append(retornarValorStringBD(produto.getD_validade().toString()));
         buffer.append(", preco=");
         buffer.append(produto.getPreco());
-        buffer.append(", forneCnpj=");
+        buffer.append(", ForneCnpj=");
         buffer.append(retornarValorStringBD(produto.getForneCnpj()));
 
         return buffer.toString();

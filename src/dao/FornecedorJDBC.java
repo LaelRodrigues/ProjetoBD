@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.IFornecedor;
@@ -99,7 +100,46 @@ public class FornecedorJDBC extends GenericDao implements IFornecedor {
 
 	@Override
 	public List<Fornecedor> listarFornecedores() {
-		return null;
+		synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Fornecedor> fornecedores = new Vector<Fornecedor>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Fornecedor");
+	                while (rs.next()) {
+	                	Fornecedor forne = new Fornecedor();
+	                	forne.setCnpj(rs.getString("cnpjForne"));
+	    				forne.setNome(rs.getString("nome"));
+	    				forne.setEmail(rs.getString("email"));
+	    				forne.setCepFornecedor(rs.getString("cepForne"));
+	                    fornecedores.add(forne);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return fornecedores;
+        }
 	}
 	
 	protected String retornarCamposBD() {

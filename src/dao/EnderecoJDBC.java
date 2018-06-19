@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.IEndereco;
@@ -102,7 +103,48 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 	}
 
 	public List<Endereco> listarEnderecos() {
-		return null;
+		synchronized (this) {
+            ResultSet rs = null;
+            
+        List<Endereco> enderecos = new Vector<Endereco>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Endereco");
+	                while (rs.next()) {
+	                	Endereco endereco = new Endereco();
+	                	endereco.setCep(rs.getString("cep"));
+	    				endereco.setUf(rs.getString("uf"));
+	    				endereco.setCidade(rs.getString("cidade"));
+	    				endereco.setBairro(rs.getString("bairro"));
+	    				endereco.setLogradouro(rs.getString("logradouro"));
+	                    enderecos.add(endereco);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return enderecos;
+        }
+
 	}
 
 	protected String retornarCamposBD() {

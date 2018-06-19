@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.IPedido;
@@ -98,7 +99,46 @@ public class PedidoJDBC extends GenericDao implements IPedido {
 
 	@Override
 	public List<Pedido> listarPedidos() {
-		return null;
+		synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Pedido> pedidos = new Vector<Pedido>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Pedido");
+	                while (rs.next()) {
+	                	Pedido pedido = new Pedido();
+	                	pedido.setIdPedido(rs.getInt("idPedido"));
+	    				pedido.setCnpjLoja(rs.getString("cnpjLoja"));
+	    				pedido.setCnpjForne(rs.getString("cnpjForne"));
+	    				pedido.setCnpjTrans(rs.getString("cnpjTrans"));
+	                    pedidos.add(pedido);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return pedidos;
+        }
 	}
 	
 	protected String retornarCamposBD() {

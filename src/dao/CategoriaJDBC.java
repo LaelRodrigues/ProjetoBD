@@ -3,10 +3,12 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.ICategoria;
 import model.Categoria;
+import model.Possui;
 
 public class CategoriaJDBC extends GenericDao implements ICategoria {
 	
@@ -95,7 +97,44 @@ public class CategoriaJDBC extends GenericDao implements ICategoria {
 
 	@Override
 	public List<Categoria> listarCategoriasProdutos() {
-		return null;
+		synchronized (this) {
+            ResultSet rs = null;
+            
+	        List<Categoria> categorias = new Vector<Categoria>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Categoria");
+	                while (rs.next()) {
+	                	Categoria categoria = new Categoria();
+	                	categoria.setCategoria(rs.getString("categoria"));
+	    				categoria.setCodigoProd(rs.getInt("codigoProd"));
+	                    categorias.add(categoria);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return categorias;
+        }
 	}
 	
 	protected String retornarCamposBD() {

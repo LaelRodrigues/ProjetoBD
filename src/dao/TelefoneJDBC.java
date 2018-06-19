@@ -1,9 +1,13 @@
 package dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.ITelefone;
+import model.Pedido;
 import model.Telefone;
 
 public class TelefoneJDBC extends GenericDao implements ITelefone {
@@ -66,6 +70,51 @@ public class TelefoneJDBC extends GenericDao implements ITelefone {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public List<Telefone> listarTelefones() {
+		synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Telefone> telefones = new Vector<Telefone>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Telefone");
+	                while (rs.next()) {
+	                	Telefone telefone = new Telefone();
+	                	telefone.setTelefone(rs.getString("telefone"));
+	    				telefone.setCnpj(rs.getString("cnpj"));
+	                    telefones.add(telefone);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return telefones;
+        }
+		
+	}
+
+	
 	
 	protected String retornarCamposBD() {
     	return "telefone, cnpj";

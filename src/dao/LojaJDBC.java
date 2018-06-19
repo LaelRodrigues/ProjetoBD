@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.ILoja;
@@ -96,7 +97,46 @@ public class LojaJDBC extends GenericDao implements ILoja {
 
 	@Override
 	public List<Loja> listarLojas() {
-		return null;
+		synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Loja> lojas = new Vector<Loja>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Loja");
+	                while (rs.next()) {
+	                	Loja loja = new Loja();
+	                	loja.setCnpj(rs.getString("cnpjLoja"));
+	    				loja.setNome(rs.getString("nome"));
+	    				loja.setEmail(rs.getString("email"));
+	    				loja.setCepLoja(rs.getString("cepLoja"));
+	                    lojas.add(loja);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return lojas;
+        }
 	}
 	
 	protected String retornarCamposBD() {

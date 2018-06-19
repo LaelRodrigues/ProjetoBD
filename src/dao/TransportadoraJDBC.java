@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 
 import conexao.ConFactory;
 import interfaceDAO.ITransportadora;
@@ -97,7 +98,46 @@ public class TransportadoraJDBC extends GenericDao implements ITransportadora {
 
 	@Override
 	public List<Transportadora> listarTransportadoras() {
-		return null;
+		synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Transportadora> trasps = new Vector<Transportadora>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Transportadora");
+	                while (rs.next()) {
+	                	Transportadora trasp = new Transportadora();
+	                	trasp.setCnpj(rs.getString("cnpjTrans"));
+	    				trasp.setNome(rs.getString("nome"));
+	    				trasp.setEmail(rs.getString("email"));
+	    				trasp.setCepTransportadora(rs.getString("cepTrans"));
+	                    trasps.add(trasp);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return trasps;
+        }
 	}
 	
 	protected String retornarCamposBD() {
