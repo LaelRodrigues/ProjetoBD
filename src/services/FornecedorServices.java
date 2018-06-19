@@ -12,7 +12,7 @@ public class FornecedorServices {
 	}
 
 	public static void cadastrar(Fornecedor forne) throws Exception {
-		System.out.println(forne.getCnpj() + " " + forne.getNome() + " " + forne.getEmail() + forne.getcepFornecedor());
+		System.out.println(forne.getCnpj() + " " + forne.getNome() + " " + forne.getEmail() +" "+ forne.getcepFornecedor());
 
 		if (forne.getCnpj().length() < 18) {
 			System.out.println("1");

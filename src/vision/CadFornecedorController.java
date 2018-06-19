@@ -65,7 +65,8 @@ public class CadFornecedorController {
 			EnderecoService.cadastrar(novoend);
 		} catch (Exception e) {
 			error.setText("incapaz de cadastrar endereço");
-			System.out.println("incapaz de cadastrar endereço");
+			System.out.println("incapaz de cadastrar endereço " + e.getMessage());
+			return;
 		}
 		
 		novo.setCnpj(cnpj.getText());
@@ -77,6 +78,7 @@ public class CadFornecedorController {
 			try {
 				FornecedorServices.cadastrar(novo);
 			} catch (Exception e) {
+				EnderecoService.deletar(novoend);
 				error.setText("incapaz de cadastrar fornecedor");
 				System.out.println("incapaz de cadastrar fornecedor");
 			}
