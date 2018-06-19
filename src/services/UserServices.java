@@ -5,11 +5,7 @@ import model.User;
 
 public class UserServices {
 
-	static UserDao userDao = new UserDao();
-
-	public static UserDao getDao() {
-		return userDao;
-	}
+	private static UserDao userDao = new UserDao();
 
 	public static Boolean login(String usuario, String senha) {
 		User remote;
