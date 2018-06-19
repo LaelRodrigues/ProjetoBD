@@ -15,21 +15,21 @@
          </children></Pane>
     <Pane layoutX="313.0" layoutY="34.0" prefHeight="560.0" prefWidth="770.0">
       <children>
-        <Label layoutX="290.0" layoutY="167.0" text="Cadastro de Fornecedor">
+        <Label layoutX="290.0" layoutY="28.0" text="Cadastro de Fornecedor">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-        <TextField id="alt4" fx:id="nome" layoutX="15.0" layoutY="301.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite o nome do Fornecedor" />
-        <TextField id="alt1" fx:id="cnpj" layoutX="15.0" layoutY="340.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o CNPJ do Fornecedor" />
-        <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="380.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o email do Fornecedor" />
-        <TextField id="alt4" fx:id="telefone" layoutX="15.0" layoutY="420.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o telefone do Fornecedor" />
-        <TextField id="alt4" fx:id="cep" layoutX="15.0" layoutY="460.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o cep do Fornecedor" />
-            <TextField id="alt4" fx:id="uf" layoutX="15.0" layoutY="500.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o estado do Fornecedor" />
-            <TextField id="alt4" fx:id="cidade" layoutX="15.0" layoutY="540.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui a cidade do Fornecedor" />
-            <TextField id="alt4" fx:id="bairro" layoutX="15.0" layoutY="580.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o bairro do Fornecedor" />
-            <TextField id="alt4" fx:id="logradouro" layoutX="15.0" layoutY="620.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o logradouro do Fornecedor" />
-        <Pane layoutX="556.0" layoutY="274.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
+        <TextField id="alt4" fx:id="nome" layoutX="15.0" layoutY="162.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite o nome do Fornecedor" />
+        <TextField id="alt1" fx:id="cnpj" layoutX="15.0" layoutY="201.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o CNPJ do Fornecedor" />
+        <TextField id="alt4" fx:id="email" layoutX="15.0" layoutY="241.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o email do Fornecedor" />
+        <TextField id="alt4" fx:id="telefone" layoutX="15.0" layoutY="281.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o telefone do Fornecedor" />
+        <TextField id="alt4" fx:id="cep" layoutX="15.0" layoutY="321.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o cep do Fornecedor" />
+            <TextField id="alt4" fx:id="uf" layoutX="15.0" layoutY="361.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o estado do Fornecedor" />
+            <TextField id="alt4" fx:id="cidade" layoutX="15.0" layoutY="401.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui a cidade do Fornecedor" />
+            <TextField id="alt4" fx:id="bairro" layoutX="15.0" layoutY="441.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o bairro do Fornecedor" />
+            <TextField id="alt4" fx:id="logradouro" layoutX="15.0" layoutY="481.0" onAction="#handlerCadastrarFornecedor" prefWidth="500.0" promptText="Digite aqui o logradouro do Fornecedor" />
+        <Pane layoutX="556.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: lightgrey; -fx-background-color: fefefe;">
           <children>
             <Button fx:id="canc" layoutX="41.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerVoltar" prefHeight="25.0" prefWidth="118.0" text="Voltar" />
             <Button fx:id="cad" layoutX="41.0" layoutY="65.0" mnemonicParsing="false" onAction="#handlerCadastrarFornecedor" prefWidth="118.0" text="Cadastrar" />
