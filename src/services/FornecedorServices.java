@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.FornecedorJDBC;
@@ -59,9 +60,17 @@ public class FornecedorServices {
 		
 	}
 	
-	public static List getList(){
+	public static List<String> getList(){
 		
-		return null;
+		List <Fornecedor> fornecedores = fornecedorDao.listarFornecedores(); 
+		List <String> cnpjForn = new ArrayList<String>();
+		
+		for(int i = 0; i < fornecedores.size(); i++){
+			System.out.println("Inserindo: "+fornecedores.get(i).getCnpj());
+			cnpjForn.add(fornecedores.get(i).getCnpj());
+		}
+		
+		return cnpjForn;
 	}
 
 }

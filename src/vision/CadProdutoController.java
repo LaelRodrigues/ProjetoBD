@@ -51,7 +51,6 @@ public class CadProdutoController {
 	public void initialize() {
 		
 		List<String> cnpjFornecedores = FornecedorServices.getList();
-		
 		cnpjForn.getItems().addAll(cnpjFornecedores);
 	}
 	

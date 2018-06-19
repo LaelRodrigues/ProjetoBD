@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -99,6 +100,28 @@ public class FornecedorJDBC extends GenericDao implements IFornecedor {
 
 	@Override
 	public List<Fornecedor> listarFornecedores() {
+		
+		List <Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
+		Fornecedor fornecedor = new Fornecedor();
+
+		try {
+			conectar();
+            String sql = "SELECT * FROM Fornecedor";
+                ResultSet rs = comando.executeQuery(sql);
+                
+                while(rs.next()) {
+                	fornecedor.setCnpj(rs.getString("cnpjForne"));
+                	fornecedor.setNome(rs.getString("nome"));
+                	fornecedor.setEmail(rs.getString("email"));
+                	fornecedor.setCepFornecedor(rs.getString("cepForne"));
+                	listaFornecedor.add(fornecedor);
+                }
+            
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
