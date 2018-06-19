@@ -100,48 +100,48 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
 
 	@Override
 	public List<Produto> listarLojas() {
-		synchronized (this) {
-	        ResultSet rs = null;
-	            
-	        List<Produto> produtos = new Vector<Produto>();
-		        try {
-		        	conectar();
-					
-		            try {
-		                rs = comando.executeQuery("SELECT * FROM Produto");
-		                while (rs.next()) {
-		                	Produto prod = new Produto();
-		                	prod.setCodigo(rs.getInt("codigo"));
-		    				prod.setNome(rs.getString("nome"));
-		    				prod.setDescricao(rs.getString("descricao"));
-		    				prod.setD_validade(rs.getDate("d_validade"));
-		    				prod.setPreco(rs.getFloat("preco"));
-		    				prod.setForneCnpj(rs.getString("ForneCnpj"));
-		                    produtos.add(prod);
-		                }
-		            } finally {
-	        			if (rs != null) {
-	        				try {
-	        					rs.close();
-	        				} catch (SQLException sqlEx) { 
-	        				} 
-	        				rs = null;
-	        			}
-	        			if (comando != null) {
-	        				try {
-	        					comando.close();
-	        				} catch (SQLException sqlEx) { 
-	        				}
-	        				comando = null;
-	        			}
-		            }
-		        } catch (SQLException SQLe) {
-		            SQLe.printStackTrace();
-		        } catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-		        return produtos;
-	        }
+	synchronized (this) {
+        ResultSet rs = null;
+            
+        List<Produto> produtos = new Vector<Produto>();
+	        try {
+	        	conectar();
+				
+	            try {
+	                rs = comando.executeQuery("SELECT * FROM Produto");
+	                while (rs.next()) {
+	                	Produto prod = new Produto();
+	                	prod.setCodigo(rs.getInt("codigo"));
+	    				prod.setNome(rs.getString("nome"));
+	    				prod.setDescricao(rs.getString("descricao"));
+	    				prod.setD_validade(rs.getDate("d_validade"));
+	    				prod.setPreco(rs.getFloat("preco"));
+	    				prod.setForneCnpj(rs.getString("ForneCnpj"));
+	                    produtos.add(prod);
+	                }
+	            } finally {
+        			if (rs != null) {
+        				try {
+        					rs.close();
+        				} catch (SQLException sqlEx) { 
+        				} 
+        				rs = null;
+        			}
+        			if (comando != null) {
+        				try {
+        					comando.close();
+        				} catch (SQLException sqlEx) { 
+        				}
+        				comando = null;
+        			}
+	            }
+	        } catch (SQLException SQLe) {
+	            SQLe.printStackTrace();
+	        } catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+	        return produtos;
+        }
 	}
 	
 	protected String retornarCamposBD() {
