@@ -66,6 +66,7 @@ public class CadFornecedorController {
 		} catch (Exception e) {
 			error.setText("incapaz de cadastrar endereço");
 			System.out.println("incapaz de cadastrar endereço " + e.getMessage());
+			e.printStackTrace();
 			return;
 		}
 		

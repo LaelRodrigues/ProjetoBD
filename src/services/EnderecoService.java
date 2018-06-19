@@ -5,7 +5,7 @@ import model.Endereco;
 
 public class EnderecoService {
 
-	private static EnderecoJDBC enderecoDao;
+	private static EnderecoJDBC enderecoDao = new EnderecoJDBC();
 
 	public static void cadastrar(Endereco novo) throws Exception {
 
@@ -38,6 +38,7 @@ public class EnderecoService {
 
 		System.out.println("inserido " + novo.getCep() + " " + novo.getUf() + " " + novo.getCidade() + " "
 				+ novo.getBairro() + " " + novo.getLogradouro());
+
 		enderecoDao.inserir(novo);
 		enderecoDao.commit();
 

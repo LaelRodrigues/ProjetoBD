@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import dao.FornecedorJDBC;
 import model.Fornecedor;
 
@@ -55,6 +57,11 @@ public class FornecedorServices {
 			System.out.println("erro da remoção");
 		}
 		
+	}
+	
+	public static List getList(){
+		
+		return null;
 	}
 
 }

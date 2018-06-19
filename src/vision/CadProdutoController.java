@@ -1,14 +1,18 @@
 package vision;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import model.User;
-import services.UserServices;
+import model.Produto;
+import services.FornecedorServices;
+import services.ProdutoService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
 
@@ -34,13 +38,7 @@ public class CadProdutoController {
 	private ChoiceBox<String> cnpjForn = new ChoiceBox<String>();
 	
 	@FXML
-	private ChoiceBox<String> vdia = new ChoiceBox<String>();
-	
-	@FXML
-	private ChoiceBox<String> vmes = new ChoiceBox<String>();
-	
-	@FXML
-	private ChoiceBox<String> vano = new ChoiceBox<String>();
+	private DatePicker calendario = new DatePicker();
 
 	@FXML
 	private Pane background;
@@ -51,15 +49,30 @@ public class CadProdutoController {
 	
 	@FXML
 	public void initialize() {
-		cnpjForn.getItems().addAll("CNPJ 1", "CNPJ 2", "CNPJ 3", "CNPJ 4");
+		
+		List<String> cnpjFornecedores = FornecedorServices.getList();
+		
+		cnpjForn.getItems().addAll(cnpjFornecedores);
 	}
 	
-	@FXML
-	public void handlerPreencheCB(){
-	}
-	
+	@SuppressWarnings("deprecation")
 	@FXML
 	public void handlerCadastrarProduto(){
+	
+		Produto novo = new Produto();
+		
+		novo.setCodigo(Integer.parseInt(codigo.getText()));
+		novo.setNome(nome.getText());
+		novo.setDescricao(descricao.getText());
+		novo.setD_validade(new Date(calendario.getValue().getYear(),calendario.getValue().getMonthValue(),calendario.getValue().getDayOfMonth()));
+		novo.setPreco(Float.parseFloat(preco.getText()));
+		novo.setForneCnpj(cnpjForn.getValue());
+		
+		try {
+			ProdutoService.cadastrar(novo);
+		} catch (Exception e1) {
+			System.out.println("impossivel cadastrar produto " + e1.getMessage());
+		}
 		
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDHOME);

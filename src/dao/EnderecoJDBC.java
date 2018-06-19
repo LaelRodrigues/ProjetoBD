@@ -37,8 +37,9 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 
 	@Override
 	public void inserir(Endereco endereco) {
+		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("INSERT INTO Endereco (");
+		buffer.append("INSERT INTO endereco (");
 		buffer.append(this.retornarCamposBD());
 		buffer.append(") VALUES (");
 		buffer.append(this.retornarValoresBD(endereco));
@@ -52,6 +53,8 @@ public class EnderecoJDBC extends GenericDao implements IEndereco {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println("nullpo");
 		}
 	}
 
