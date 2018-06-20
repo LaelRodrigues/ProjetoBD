@@ -102,7 +102,7 @@ public class PedidoJDBC extends GenericDao implements IPedido {
 	}
 	
 	protected String retornarCamposBD() {
-    	return "idPedido, cnpjLoja, cnpjForne, cnpjTrans";
+    	return "cnpjLoja, cnpjForne, cnpjTrans";
     }
 	
 	protected String returnFieldValuesBD(Pedido pedido) {

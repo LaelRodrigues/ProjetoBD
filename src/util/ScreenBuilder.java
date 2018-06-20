@@ -115,5 +115,13 @@ public class ScreenBuilder {
 		buildScreen();
 		
 	}
+	
+	public static void renderFazerPedido() {
+
+		path = "/vision/FazerPedidoScreen.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Faça seu pedido"; // nome q aparece no topo da tela
+		buildScreen();
+		
+	}
 
 }

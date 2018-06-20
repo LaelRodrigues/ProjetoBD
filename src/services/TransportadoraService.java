@@ -1,6 +1,9 @@
 package services;
 
+import java.util.List;
+
 import dao.TransportadoraJDBC;
+import model.Loja;
 import model.Transportadora;
 
 public class TransportadoraService {
@@ -39,6 +42,10 @@ public class TransportadoraService {
 
 	public static void deletar(Transportadora novoend) {
 		transportDao.remover(novoend);
+	}
+	
+	public static List<Transportadora> getFullList(){ //captando a lista com detalhes das lojas
+		return transportDao.listarTransportadoras();
 	}
 
 }

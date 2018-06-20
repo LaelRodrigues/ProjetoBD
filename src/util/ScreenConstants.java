@@ -14,6 +14,7 @@ public class ScreenConstants {
 	public static final int IDEDITPRODUTO = 7;
 	public static final int IDCADQTDPRODUTO = 8;
 	public static final int IDLISTQTDPRODUTO = 9;
+	public static final int IDFAZERPEDIDO = 10;
 	
 	
 }

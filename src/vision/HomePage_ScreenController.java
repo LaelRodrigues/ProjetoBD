@@ -81,4 +81,13 @@ public class HomePage_ScreenController {
 			e1.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void handlerFazerPedido() {
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDFAZERPEDIDO);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

@@ -75,6 +75,9 @@ public class ScreenLibrary {
 		else if(id == ScreenConstants.IDLISTQTDPRODUTO)
 			ScreenBuilder.renderListaQuantidadeProduto();
 		
+		else if(id == ScreenConstants.IDFAZERPEDIDO)
+			ScreenBuilder.renderFazerPedido();
+		
 		
 		else throw new UnsupportedEncodingException("tela indefida");
 
