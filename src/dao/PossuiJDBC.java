@@ -48,7 +48,7 @@ public class PossuiJDBC extends GenericDao implements IPossui {
 	}
 	
 	protected String retornarCamposBD() {
-    	return "idPedido, codigo, quantidade";
+    	return "codigo, quantidade";
     }
 	
 	protected String returnFieldValuesBD(Possui possui) {
