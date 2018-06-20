@@ -54,6 +54,25 @@ public class LojaService {
 		return cnpjLoja;
 	}
 	
+	public static List<String> getListNomes(){
+		
+		List <Loja> lojas = new ArrayList<Loja>(); 
+		lojas = lojaDao.listarLojas(); 
+		
+		List <String> cnpjLoja = new ArrayList<String>();
+		
+		for(int i = 0; i < lojas.size(); i++){
+			System.out.println("Loja "+i+" nome: "+lojas.get(i).getNome());
+			cnpjLoja.add(lojas.get(i).getNome());
+		}
+		
+		return cnpjLoja;
+	}
+	
+	public static List<Loja> getFullList(){ //captando a lista com detalhes das lojas
+		return lojaDao.listarLojas();
+	}
+	
 	public static Loja getLoja(String cnpj) {
 		return lojaDao.buscar(cnpj);
 	}

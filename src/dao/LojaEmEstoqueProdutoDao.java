@@ -8,9 +8,9 @@ import java.util.List;
 import conexao.ConFactory;
 import model.LojaXEmEstoqueXProduto;;
 
-public class LojaEmEstoqueProduto extends GenericDao {
+public class LojaEmEstoqueProdutoDao extends GenericDao {
 
-	public List<LojaXEmEstoqueXProduto> listarForneEnderecos() {
+	public List<LojaXEmEstoqueXProduto> listarQtdProdutosLojas() {
 
 		List<LojaXEmEstoqueXProduto> lista = new ArrayList<LojaXEmEstoqueXProduto>();
 		try {
@@ -26,9 +26,9 @@ public class LojaEmEstoqueProduto extends GenericDao {
 				produtoJoinLoja.setCepLoja(rs.getString("cepLoja"));
 				produtoJoinLoja.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
 				produtoJoinLoja.setCodigo(Integer.parseInt(rs.getString("codigo")));
-				produtoJoinLoja.setNomeProd(rs.getString("bairro"));
-				produtoJoinLoja.setDescricao(rs.getString("logradouro"));
-				//produtoJoinLoja.setD_validade(rs.getString("logradouro"));
+				produtoJoinLoja.setNomeProd(rs.getString("nomeProd"));
+				produtoJoinLoja.setDescricao(rs.getString("descricao"));
+				produtoJoinLoja.setD_validade(null);
 				produtoJoinLoja.setPreco(Float.parseFloat(rs.getString("preco")));
 				produtoJoinLoja.setForneCnpj(rs.getString("ForneCnpj"));
 				produtoJoinLoja.setNomeProd(rs.getString("nomeProd"));
@@ -40,14 +40,27 @@ public class LojaEmEstoqueProduto extends GenericDao {
 			e.printStackTrace();
 
 		} catch (SQLException SQLe) {
+			System.out.println("Ta dando erro aqui, infelizmente");
 			SQLe.printStackTrace();
 		}
 		return lista;
 
 	}
 
+	public List<LojaXEmEstoqueXProduto> buscar(String cnpj) {
+		List<LojaXEmEstoqueXProduto> lojaEstoqueProdutoTotal = listarQtdProdutosLojas();
+		List<LojaXEmEstoqueXProduto> lojaEstoqueProduto = new ArrayList<>();
+		for(int i=0; i<lojaEstoqueProdutoTotal.size(); i++) {
+			if(lojaEstoqueProdutoTotal.get(i).getCnpj().equals(cnpj)) { // se o cnpj procurado for igual ao cnpj do campo I do 
+																			//vetor ele insere no novo vetor os valores referentes ao campo I
+				lojaEstoqueProduto.add(lojaEstoqueProdutoTotal.get(i));
+			}
+		}
+		return lojaEstoqueProduto;
+	}
+	
 	protected String retornarCamposBD() {
-		return "cnpjLoja, Loja.nome AS nomeLoja, email, cepLoja, quantidade, codigo, Produto.nome AS nomeProd, descricao, d_validade, preco, forneCnpj";
+		return " cnpjLoja, Loja.nome AS nomeLoja, email, cepLoja, quantidade, codigo, Produto.nome AS nomeProd, descricao, d_validade, preco, forneCnpj ";
 	}
 
 	private void conectar() throws ClassNotFoundException, SQLException {

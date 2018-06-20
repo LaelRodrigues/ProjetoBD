@@ -71,4 +71,13 @@ public class HomePage_ScreenController {
 			e1.printStackTrace();
 		}
 	}
+	
+	@FXML
+	public void handlerListarQuantidadeProduto() {
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDLISTQTDPRODUTO);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

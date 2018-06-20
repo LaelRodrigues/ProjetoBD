@@ -16,4 +16,8 @@ public class EmEstoqueService {
 			emEstoque.commit();
 		}
 	}
+	
+	public static void buscar() {
+		
+	}
 }

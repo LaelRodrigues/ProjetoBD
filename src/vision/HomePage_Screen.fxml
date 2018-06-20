@@ -19,6 +19,7 @@
             <Button layoutX="15.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerCadastrarTransportadora" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Transportadora" />
             <Button layoutX="449.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerCadastrarLoja" prefHeight="75.0" prefWidth="419.0" text="Cadastrar Loja" />
             <Button layoutX="880.0" layoutY="108.0" mnemonicParsing="false" onAction="#handlerEditarProduto" prefHeight="75.0" prefWidth="419.0" text="Editar Produto" />
+            <Button layoutX="14.0" layoutY="201.0" mnemonicParsing="false" onAction="#handlerListarQuantidadeProduto" prefHeight="75.0" prefWidth="419.0" text="Listar Produtos Por Loja" />
           </children>
         </Pane>
       </children>

@@ -107,5 +107,13 @@ public class ScreenBuilder {
 		buildScreen();
 		
 	}
+	
+	public static void renderListaQuantidadeProduto() {
+
+		path = "/vision/ListarQtdProdutoEmEstoque.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Quantidade de Produto por Loja"; // nome q aparece no topo da tela
+		buildScreen();
+		
+	}
 
 }
