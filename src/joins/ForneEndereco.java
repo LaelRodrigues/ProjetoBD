@@ -9,7 +9,6 @@ import conexao.ConFactory;
 import dao.GenericDao;
 
 public class ForneEndereco extends GenericDao {
-	
 	private String cnpjForne;
 	private String nome;
 	private String email;
