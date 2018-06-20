@@ -73,6 +73,8 @@ public class ListarQtdProdutoEmEstoqueController {
 
 		canNext = false;
 		canPrev = false;
+		
+		System.out.println("Listsize "+listSize);
 
 		if (listSize == 0) {
 			// ?? não tem nada pra fazer aqui
