@@ -14,6 +14,7 @@ public class Em_estoqueJDBC extends GenericDao implements IEm_estoque{
 
 	@Override
 	public void inserir(Em_estoque estoque) {
+		
 		StringBuffer buffer = new StringBuffer();
         buffer.append("INSERT INTO Em_estoque (");
         buffer.append(this.retornarCamposBD());
@@ -21,8 +22,8 @@ public class Em_estoqueJDBC extends GenericDao implements IEm_estoque{
         buffer.append(this.retornarValoresBD(estoque));
         buffer.append(")");
         String sql = buffer.toString();
-
-    	try {
+        
+        try {
 			conectar();
     		comando.execute(sql);
 		} catch (ClassNotFoundException e) {

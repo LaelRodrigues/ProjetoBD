@@ -1,6 +1,10 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.LojaJDBC;
+import model.Fornecedor;
 import model.Loja;
 
 public class LojaService {
@@ -33,6 +37,25 @@ public class LojaService {
 		lojaDao.inserir(novo);
 		lojaDao.commit();
 
+	}
+	
+	public static List<String> getList(){
+		
+		List <Loja> lojas = new ArrayList<Loja>(); 
+		lojas = lojaDao.listarLojas(); 
+		
+		List <String> cnpjLoja = new ArrayList<String>();
+		
+		for(int i = 0; i < lojas.size(); i++){
+			System.out.println("Loja "+i+" cnpj: "+lojas.get(i).getCnpj());
+			cnpjLoja.add(lojas.get(i).getCnpj());
+		}
+		
+		return cnpjLoja;
+	}
+	
+	public static Loja getLoja(String cnpj) {
+		return lojaDao.buscar(cnpj);
 	}
 }
 

@@ -99,5 +99,13 @@ public class ScreenBuilder {
 		buildScreen();
 		
 	}
+	
+	public static void renderCadastraQuantidadeProduto() {
+
+		path = "/vision/CadQtdEmEstoque.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Estoque Loja"; // nome q aparece no topo da tela
+		buildScreen();
+		
+	}
 
 }
