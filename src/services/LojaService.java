@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.LojaJDBC;
-import model.Fornecedor;
 import model.Loja;
 
 public class LojaService {

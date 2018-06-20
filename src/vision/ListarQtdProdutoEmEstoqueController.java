@@ -4,13 +4,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import model.Em_estoque;
 import model.Loja;
 import model.LojaXEmEstoqueXProduto;
+import services.EmEstoqueService;
 import services.LojaEstoqueProdutoService;
 import services.LojaService;
 import util.ScreenConstants;
@@ -19,7 +24,7 @@ import util.ScreenLibrary;
 public class ListarQtdProdutoEmEstoqueController {
 
 	private List<Pane> panesTuple = new ArrayList<Pane>();
-	// private List<Button> buts = new ArrayList<Button>();
+	private List<Button> buts = new ArrayList<Button>();
 
 	@FXML
 	private Pane pane;
@@ -29,9 +34,6 @@ public class ListarQtdProdutoEmEstoqueController {
 
 	@FXML
 	private Button bPrev;
-
-	@FXML
-	private Button buscar;
 
 	@FXML
 	private ChoiceBox<String> choiceBoxListaLojas = new ChoiceBox<>();
@@ -69,7 +71,11 @@ public class ListarQtdProdutoEmEstoqueController {
 																		// para
 																		// seleção
 
-		// listaLojas = LojaService.getFullList();
+		choiceBoxListaLojas.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				handlerBuscar();
+			};
+		});
 		System.out.println(listSize);
 
 	}
@@ -98,16 +104,16 @@ public class ListarQtdProdutoEmEstoqueController {
 				maxSizedList = lNumber;
 			}
 
-			// seguindo = seguindoDao.getList();
-
 			for (int i = 0; i < maxSizedList; i++) {
 
+				final Button editar = new Button("Editar");
 				Label productCode = new Label(listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getCodigo()
 						+ " - Nome do Produto : "
 						+ listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getNomeProd() + " - Quantidade :"
 						+ listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getQuantidade());
 
 				Pane tuple = new Pane();
+				final int id = i + ((nPagina - 1) * lNumber);
 
 				tuple.setPrefSize(1150, 50);
 
@@ -117,15 +123,55 @@ public class ListarQtdProdutoEmEstoqueController {
 					tuple.setStyle("-fx-background-color: whitesmoke; -fx-border-color: lightgrey;");
 
 				tuple.getChildren().add(productCode);
+				tuple.getChildren().add(editar);
 
 				productCode.setLayoutX(50);
+				editar.setLayoutX(550);
 
 				productCode.setLayoutY(15);
+				editar.setLayoutY(15);
 
 				tuple.setLayoutX(15);
 				tuple.setLayoutY((i * 50) + 100);
 
+				editar.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+						TextField space = new TextField(listaProdutosEstoque.get(id).getQuantidade() + "");
+						space.setLayoutX(600);
+						space.setLayoutY(15);
+
+						Button ok = new Button("Atualizar");
+						ok.setLayoutX(750);
+						ok.setLayoutY(15);
+
+						ok.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent e) {
+
+								Em_estoque novo = new Em_estoque();
+								novo.setCnpjL(listaProdutosEstoque.get(id).getCnpj());
+								novo.setCodicoP(listaProdutosEstoque.get(id).getCodigo());
+								novo.setQuantidade(Integer.parseInt(space.getText()));
+								try {
+									EmEstoqueService.atualizar(novo);
+								} catch (Exception e1) {
+									System.out.println("incapaz de atualizar o estoque");
+								}
+								// tuple.getChildren().remove(space);
+								// tuple.getChildren().remove(ok);
+								unloadTuplesOnScreen();
+								loadTuplesOnScreen();
+								handlerBuscar();
+
+							};
+						});
+
+						tuple.getChildren().add(space);
+						tuple.getChildren().add(ok);
+					};
+				});
+
 				panesTuple.add(tuple);
+				buts.add(editar);
 
 			}
 		}
@@ -165,7 +211,6 @@ public class ListarQtdProdutoEmEstoqueController {
 				listaProdutosEstoque = LojaEstoqueProdutoService.buscarcnpj(compair[0]);
 				listSize = listaProdutosEstoque.size();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			loadPage();

@@ -71,7 +71,7 @@ public class EditaProdutoSelectController {
 			//seguindo = seguindoDao.getList();
 
 			for (int i = 0; i < maxSizedList; i++) {
-				final Button follow = new Button("Editar");
+				final Button editar = new Button("Editar estoque");
 				final int id = i + ((nPagina - 1) * lNumber);
 
 				Label productCode = new Label(listProdutos.get(i + ((nPagina - 1) * lNumber)).getCodigo()+" - " + listProdutos.get(i + ((nPagina - 1) * lNumber)).getNome());
@@ -87,18 +87,18 @@ public class EditaProdutoSelectController {
 
 
 				tuple.getChildren().add(productCode);
-				tuple.getChildren().add(follow);
+				tuple.getChildren().add(editar);
 
 				productCode.setLayoutX(50);
-				follow.setLayoutX(550);
+				editar.setLayoutX(550);
 
 				productCode.setLayoutY(15);
-				follow.setLayoutY(15);
+				editar.setLayoutY(15);
 
 				tuple.setLayoutX(15);
 				tuple.setLayoutY((i * 50) + 100);
 
-				follow.setOnAction(new EventHandler<ActionEvent>() {
+				editar.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
 						SharedInfo.setCodigo(listProdutos.get(id).getCodigo());
 						try {
@@ -111,7 +111,7 @@ public class EditaProdutoSelectController {
 
 
 				panesTuple.add(tuple);
-				buts.add(follow);
+				buts.add(editar);
 
 			}
 		}

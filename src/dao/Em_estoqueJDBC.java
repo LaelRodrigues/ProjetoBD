@@ -33,6 +33,26 @@ public class Em_estoqueJDBC extends GenericDao implements IEm_estoque{
 		}
 	}
 	
+	public void atualizar(Em_estoque estoque) {
+		
+		StringBuffer buffer = new StringBuffer();
+        buffer.append("UPDATE Em_estoque SET ");
+        buffer.append(returnFieldValuesBD(estoque));
+        buffer.append(" WHERE cnpjL = '"+ estoque.getCnpjL()); 
+        buffer.append("' and codigoP = " + estoque.getCodicoP());
+        String sql = buffer.toString();
+        
+    	try {
+			conectar();
+    		comando.execute(sql);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	protected String retornarCamposBD() {
     	return "cnpjL, codigoP, quantidade";
     }
