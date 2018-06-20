@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.SQLException;
 
+import com.mysql.jdbc.Statement;
+
 import conexao.ConFactory;
 import interfaceDAO.IPossui;
 import model.Possui;
@@ -24,7 +26,9 @@ public class PossuiJDBC extends GenericDao implements IPossui {
 
     	try {
 			conectar();
-    		comando.execute(sql);
+			comando = con.createStatement();
+			comando.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+    		//comando.execute(sql);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -48,7 +52,7 @@ public class PossuiJDBC extends GenericDao implements IPossui {
 	}
 	
 	protected String retornarCamposBD() {
-    	return "codigo, quantidade";
+    	return "idPedido, codigo, quantidade";
     }
 	
 	protected String returnFieldValuesBD(Possui possui) {

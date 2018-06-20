@@ -1,5 +1,7 @@
 package services;
 
+import java.util.List;
+
 import dao.Em_estoqueJDBC;
 import dao.PedidoJDBC;
 import model.Em_estoque;
@@ -27,7 +29,11 @@ public class PedidoService {
 		}
 	}
 
-	public static void buscar() {
-
+	public static List<Pedido> buscar() {
+		return pedidoJdbc.listarPedidos();
+	}
+	
+	public static Integer buscarId() {
+		return pedidoJdbc.listarPedidos().get(pedidoJdbc.listarPedidos().size()-1).getIdPedido();
 	}
 }

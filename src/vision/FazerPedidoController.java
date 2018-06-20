@@ -25,6 +25,7 @@ import services.LojaService;
 import services.PedidoPossuiProdutoService;
 import services.PedidoService;
 import services.PossuiService;
+import services.ProdutoService;
 import services.TransportadoraService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
@@ -59,6 +60,8 @@ public class FazerPedidoController {
 	private List<PedidoPossuiProdutos> listaProdutosPedido = new ArrayList<PedidoPossuiProdutos>();
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 	private int listSize;
+	
+	private boolean v1, v2;
 
 	public List<String> preecheChoiceBoxLoja() { // método para deixar o
 													// choicebox mais legível
@@ -98,9 +101,19 @@ public class FazerPedidoController {
 																		// para
 																		// seleção
 
+		v1 = false;
+		v2 = false;
 		choiceBoxListaLojas.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				handlerBuscar();
+				v1=true;
+			};
+		});
+		
+		choiceBoxListaTransportadoras.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				if(v1)
+					handlerBuscar();
+				
 			};
 		});
 		System.out.println(listSize);
@@ -108,6 +121,10 @@ public class FazerPedidoController {
 	}
 
 	private void loadPage() {
+		
+		
+		
+		System.out.println(listSize);
 
 		canNext = false;
 		canPrev = false;
@@ -133,7 +150,12 @@ public class FazerPedidoController {
 
 			for (int i = 0; i < maxSizedList; i++) {
 				
-				Pedido novoPedido = new Pedido(choiceBoxListaLojas.getValue(), null, choiceBoxListaTransportadoras.getValue());
+				final String divideStringLoja[] = choiceBoxListaLojas.getValue().split(" ");
+				final String divideStringTrans[] = choiceBoxListaTransportadoras.getValue().split(" ");
+				
+				Pedido novoPedido = new Pedido(divideStringLoja[0], null, divideStringTrans[0]);
+				
+				//colar a porra aqui
 
 				final Button adicionarCarrinho = new Button("Adicionar ao Carrinho");
 				Label productCode = new Label(listaEstoqueLoja.get(i + ((nPagina - 1) * lNumber)).getCodigo()
@@ -184,7 +206,9 @@ public class FazerPedidoController {
 									System.out.println("Não conseguimos cadastrar seu pedido, sifudesse");
 								}
 								Possui novo = new Possui();
-								novo.setIdPedido(novoPedido.getIdPedido());
+								System.out.println("PAUNOCUDOCARALHO "+novoPedido.getIdPedido());
+								//pedidos = PedidoService.buscar();
+								novo.setIdPedido(PedidoService.buscarId());
 								novo.setCodigo(listaEstoqueLoja.get(idPagina).getCodigo());
 								novo.setQuantidade(Integer.parseInt(space.getText()));
 								try {
