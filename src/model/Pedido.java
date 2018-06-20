@@ -14,9 +14,8 @@ public class Pedido {
 		this.cnpjTrans = null;
 	}
 	
-	public Pedido(Integer idPedido, String cnpjLoja, String cnpjForne, String cnpjTrans) {
+	public Pedido(String cnpjLoja, String cnpjForne, String cnpjTrans) {
 		super();
-		this.idPedido = idPedido;
 		this.cnpjLoja = cnpjLoja;
 		this.cnpjForne = cnpjForne;
 		this.cnpjTrans = cnpjTrans;

@@ -23,6 +23,8 @@ import services.EmEstoqueService;
 import services.LojaEstoqueProdutoService;
 import services.LojaService;
 import services.PedidoPossuiProdutoService;
+import services.PedidoService;
+import services.PossuiService;
 import services.TransportadoraService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
@@ -130,6 +132,8 @@ public class FazerPedidoController {
 			}
 
 			for (int i = 0; i < maxSizedList; i++) {
+				
+				Pedido novoPedido = new Pedido(choiceBoxListaLojas.getValue(), null, choiceBoxListaTransportadoras.getValue());
 
 				final Button adicionarCarrinho = new Button("Adicionar ao Carrinho");
 				Label productCode = new Label(listaEstoqueLoja.get(i + ((nPagina - 1) * lNumber)).getCodigo()
@@ -171,14 +175,22 @@ public class FazerPedidoController {
 						quantidade.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent e) {
 
+								novoPedido.setCnpjForne(listaEstoqueLoja.get(idPagina).getForneCnpj());
+								try {
+									PedidoService.cadastrar(novoPedido);
+								} catch (Exception e2) {
+									// TODO Auto-generated catch block
+									e2.printStackTrace();
+									System.out.println("Não conseguimos cadastrar seu pedido, sifudesse");
+								}
 								Possui novo = new Possui();
-								// novo.setIdPedido(listaEstoqueLoja.get(idPagina));
+								novo.setIdPedido(novoPedido.getIdPedido());
 								novo.setCodigo(listaEstoqueLoja.get(idPagina).getCodigo());
 								novo.setQuantidade(Integer.parseInt(space.getText()));
 								try {
-									PedidoPossuiProdutoService.buscarId(idPagina);
+									PossuiService.cadastrar(novo);
 								} catch (Exception e1) {
-									System.out.println("incapaz de atualizar o estoque");
+									System.out.println("incapaz de anexar o produto ao pedido");
 								}
 								// tuple.getChildren().remove(space);
 								// tuple.getChildren().remove(ok);
