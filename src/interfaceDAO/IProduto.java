@@ -9,5 +9,5 @@ public interface IProduto {
 	 public void inserir(Produto produto);
 	 public Produto buscar(Integer codigo);
 	 public void remover(Produto produto);
-	 public List<Produto> listarLojas();
+	 public List<Produto> listarProduto();
 }

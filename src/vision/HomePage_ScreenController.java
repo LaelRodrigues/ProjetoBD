@@ -14,7 +14,7 @@ public class HomePage_ScreenController {
 
 	@FXML
 	public void initialize() {
-		
+		SharedInfo.setCodigo(0);
 	}
 
 	@FXML
@@ -49,6 +49,15 @@ public class HomePage_ScreenController {
 	public void handlerCadastrarLoja() {
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDCADLOJA);
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void handlerEditarProduto() {
+		try {
+			ScreenLibrary.LoadTela(ScreenConstants.IDEDITPRODUTO);
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}

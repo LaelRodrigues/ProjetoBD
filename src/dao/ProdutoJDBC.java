@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import conexao.ConFactory;
@@ -69,7 +70,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
                 	produto.setCodigo(rs.getInt("codigo"));
     				produto.setNome(rs.getString("nome"));
     				produto.setDescricao(rs.getString("descricao"));
-    				produto.setD_validade(rs.getDate("cepLoja"));
+    				produto.setD_validade(rs.getDate("d_validade"));
     				produto.setForneCnpj(rs.getString("forneCnpj"));
     				System.out.println(produto.getNome());
                 }
@@ -98,8 +99,33 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
 	}
 
 	@Override
-	public List<Produto> listarLojas() {
-		return null;
+	public List<Produto> listarProduto() {
+
+		List <Produto> listaProduto = new ArrayList<Produto>();
+
+		Produto lojas ;
+		try {
+			conectar();
+            String sql = "SELECT * FROM Produto";
+                ResultSet rs = comando.executeQuery(sql);
+                
+                while(rs.next()) {
+                	lojas = new Produto();
+                	lojas.setCodigo(Integer.parseInt(rs.getString("codigo")));
+                	lojas.setNome(rs.getString("nome"));
+                	lojas.setDescricao(rs.getString("descricao"));
+                	//lojas.setD_validade(rs.getString("cepForne"));
+                	lojas.setPreco(Float.parseFloat(rs.getString("preco")));
+                	lojas.setForneCnpj(rs.getString("forneCnpj"));
+                	listaProduto.add(lojas);
+                }
+            
+        } catch (SQLException SQLe) {
+            SQLe.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return listaProduto;
 	}
 	
 	protected String retornarCamposBD() {

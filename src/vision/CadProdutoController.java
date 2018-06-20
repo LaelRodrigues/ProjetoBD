@@ -18,85 +18,93 @@ import util.ScreenLibrary;
 
 public class CadProdutoController {
 
-	
 	@FXML
 	private Label error;
-	
+
 	@FXML
 	private TextField codigo;
-	
+
 	@FXML
 	private TextField nome;
-	
+
 	@FXML
 	private TextField descricao;
-	
+
 	@FXML
 	private TextField preco;
-	
+
 	@FXML
 	private ChoiceBox<String> cnpjForn = new ChoiceBox<String>();
-	
+
 	@FXML
 	private DatePicker calendario = new DatePicker();
 
 	@FXML
 	private Pane background;
-	
+
 	@FXML
 	private Pane logo;
-	//private User user = new User();
-	
+	// private User user = new User();
+
+	private boolean att = false;
+
 	@FXML
 	public void initialize() {
-		
+
+		if (SharedInfo.getCodigo() > 0) {
+			Produto produto = ProdutoService.getProduto(SharedInfo.getCodigo());
+
+			codigo.setText("" + produto.getCodigo());
+			nome.setText(produto.getNome());
+			descricao.setText(produto.getDescricao());
+			preco.setText("" + produto.getPreco());
+			att = true;
+
+		}
+
 		List<String> cnpjFornecedores = FornecedorService.getList();
 		cnpjForn.getItems().addAll(cnpjFornecedores);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@FXML
-	public void handlerCadastrarProduto(){
-	
+	public void handlerCadastrarProduto() {
+
 		Produto novo = new Produto();
-		
+
 		novo.setCodigo(Integer.parseInt(codigo.getText()));
 		novo.setNome(nome.getText());
 		novo.setDescricao(descricao.getText());
-		novo.setD_validade(new Date(calendario.getValue().getYear(),calendario.getValue().getMonthValue(),calendario.getValue().getDayOfMonth()));
+		novo.setD_validade(new Date(calendario.getValue().getYear(), calendario.getValue().getMonthValue(),
+				calendario.getValue().getDayOfMonth()));
 		novo.setPreco(Float.parseFloat(preco.getText()));
 		novo.setForneCnpj(cnpjForn.getValue());
-		
+
 		try {
-			ProdutoService.cadastrar(novo);
+			if (att == false)
+				ProdutoService.cadastrar(novo);
+			else {
+				ProdutoService.atualizar(novo);
+				SharedInfo.setCodigo(0);
+			}
+
 		} catch (Exception e1) {
 			System.out.println("impossivel cadastrar produto " + e1.getMessage());
 		}
-		
+
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDHOME);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	@FXML
-	public void handlerVoltar(){
+	public void handlerVoltar() {
 		try {
 			ScreenLibrary.LoadTela(ScreenConstants.IDHOME);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public void recebeIdPergunta(long id){
-		idPerguntaRecebida = id;
-		System.out.println("ESTAMOS RECEBENDO NO CONTROLLER COM O ID: "+idPerguntaRecebida);
-		try {
-			ScreenLibrary.LoadTela(ScreenConstants.IDCADPERG);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}*/
-	
 }

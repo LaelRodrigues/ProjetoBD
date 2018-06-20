@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.ProdutoJDBC;
 import model.Produto;
 
@@ -23,11 +26,6 @@ public class ProdutoService {
 			System.out.println("3");
 			throw new Exception("Descrição invalida");
 		}
-
-		if (1 < 999999 * novo.getCodigo()) {
-			System.out.println("4");
-			throw new Exception("Validade invalido");
-		}
 		if (novo.getPreco() < 0) {
 			System.out.println("5");
 			throw new Exception("Preço invalido");
@@ -47,6 +45,33 @@ public class ProdutoService {
 
 	public static void deletar(Produto novoend) {
 		produtoDao.remover(novoend);
+	}
+
+	public static List<String> getListInt() {
+
+		List<Produto> produtos = new ArrayList<Produto>();
+		produtos = produtoDao.listarProduto();
+
+		List<String> codigoForn = new ArrayList<String>();
+
+		for (int i = 0; i < produtos.size(); i++) {
+			codigoForn.add("" + produtos.get(i).getCodigo());
+		}
+
+		return codigoForn;
+	}
+	
+	public static List<Produto> getList(){
+		return produtoDao.listarProduto();
+	}
+
+	public static Produto getProduto(int codigo) {
+		return produtoDao.buscar(codigo);
+		
+	}
+
+	public static void atualizar(Produto novo) {
+		produtoDao.atualizar(novo);
 	}
 
 }

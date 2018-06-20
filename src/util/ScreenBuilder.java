@@ -92,4 +92,12 @@ public class ScreenBuilder {
 
 	}
 
+	public static void renderEditProduto() {
+
+		path = "/vision/EditProdutoSelect.fxml"; // arquivo fxml q vcs vão abrir la no screnebuilder (o programa)
+		title = "Editar Produto"; // nome q aparece no topo da tela
+		buildScreen();
+		
+	}
+
 }
