@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import util.ScreenConstants;
 import util.ScreenLibrary;
+import util.SharedInfo;
 
 public class HomePage_ScreenController {
 

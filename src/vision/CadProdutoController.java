@@ -15,6 +15,7 @@ import services.FornecedorService;
 import services.ProdutoService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
+import util.SharedInfo;
 
 public class CadProdutoController {
 

@@ -9,12 +9,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import model.Produto;
 import services.ProdutoService;
 import util.ScreenConstants;
 import util.ScreenLibrary;
+import util.SharedInfo;
 
 public class EditaProdutoSelectController {
 	
@@ -72,7 +72,6 @@ public class EditaProdutoSelectController {
 
 			for (int i = 0; i < maxSizedList; i++) {
 				final Button follow = new Button("Editar");
-				final TextField quantProd = new TextField();
 				final int id = i + ((nPagina - 1) * lNumber);
 
 				Label productCode = new Label(listProdutos.get(i + ((nPagina - 1) * lNumber)).getCodigo()+" - " + listProdutos.get(i + ((nPagina - 1) * lNumber)).getNome());
