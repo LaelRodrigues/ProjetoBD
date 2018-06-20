@@ -72,6 +72,12 @@ public class ProdutoService {
 
 	public static void atualizar(Produto novo) {
 		produtoDao.atualizar(novo);
+		try {
+			produtoDao.commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
