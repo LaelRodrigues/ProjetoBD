@@ -70,8 +70,9 @@ public class ProdutoService {
 		
 	}
 
-	public static void atualizar(Produto novo) {
+	public static void atualizar(Produto novo) throws Exception {
 		produtoDao.atualizar(novo);
+		produtoDao.commit();
 	}
 
 }

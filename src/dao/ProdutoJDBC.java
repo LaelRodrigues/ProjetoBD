@@ -28,6 +28,7 @@ public class ProdutoJDBC extends GenericDao implements IProduto {
     	try {
 			conectar();
     		comando.execute(sql);
+    		System.out.println("atualizadoo " + produto.getNome());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

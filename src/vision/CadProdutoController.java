@@ -55,6 +55,7 @@ public class CadProdutoController {
 			Produto produto = ProdutoService.getProduto(SharedInfo.getCodigo());
 
 			codigo.setText("" + produto.getCodigo());
+			codigo.setDisable(true);
 			nome.setText(produto.getNome());
 			descricao.setText(produto.getDescricao());
 			preco.setText("" + produto.getPreco());
