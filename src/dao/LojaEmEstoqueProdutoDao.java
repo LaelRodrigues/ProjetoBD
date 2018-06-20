@@ -40,7 +40,6 @@ public class LojaEmEstoqueProdutoDao extends GenericDao {
 			e.printStackTrace();
 
 		} catch (SQLException SQLe) {
-			System.out.println("Ta dando erro aqui, infelizmente");
 			SQLe.printStackTrace();
 		}
 		return lista;

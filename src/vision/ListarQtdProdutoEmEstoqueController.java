@@ -45,7 +45,6 @@ public class ListarQtdProdutoEmEstoqueController {
 	private boolean canPrev;
 	private int nPagina = 1;
 	private int lNumber = 10;
-	private List<Produto> listProdutos = new ArrayList<Produto>();
 	private List<Loja> listaLojas = new ArrayList<Loja>();
 	private List<LojaXEmEstoqueXProduto> listaProdutosEstoque = new ArrayList<LojaXEmEstoqueXProduto>();
 	private int listSize;
@@ -61,14 +60,11 @@ public class ListarQtdProdutoEmEstoqueController {
 	
 	@FXML
 	public void initialize() {
-		System.out.println("VALOR ANTES DE QUALQUER SELECAO "+choiceBoxListaLojas.getValue());
 		
 		choiceBoxListaLojas.getItems().clear();
 		choiceBoxListaLojas.getItems().addAll(preecheChoiceBoxLoja()); //inserindo o nome das lojas no choicebox para seleção
 		
 		//listaLojas = LojaService.getFullList();
-		listProdutos = ProdutoService.getList();
-		listSize = listProdutos.size();
 		System.out.println(listSize);
 		
 	}
@@ -98,10 +94,8 @@ public class ListarQtdProdutoEmEstoqueController {
 			//seguindo = seguindoDao.getList();
 
 			for (int i = 0; i < maxSizedList; i++) {
-				final Button follow = new Button("Editar");
-				final int id = i + ((nPagina - 1) * lNumber);
 
-				Label productCode = new Label("Produto codigo: " + listProdutos.get(i + ((nPagina - 1) * lNumber)).getCodigo());
+				Label productCode = new Label(listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getCodigo()+" - Nome do Produto : " + listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getNomeProd() + " - Quantidade :" + listaProdutosEstoque.get(i + ((nPagina - 1) * lNumber)).getQuantidade());
 
 				Pane tuple = new Pane();
 
@@ -114,31 +108,16 @@ public class ListarQtdProdutoEmEstoqueController {
 
 
 				tuple.getChildren().add(productCode);
-				tuple.getChildren().add(follow);
 
 				productCode.setLayoutX(50);
-				follow.setLayoutX(550);
 
 				productCode.setLayoutY(15);
-				follow.setLayoutY(15);
 
 				tuple.setLayoutX(15);
 				tuple.setLayoutY((i * 50) + 100);
 
-				follow.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent e) {
-						SharedInfo.setCodigo(listProdutos.get(id).getCodigo());
-						try {
-							ScreenLibrary.LoadTela(ScreenConstants.IDCADPROD);
-						} catch (UnsupportedEncodingException ee) {
-							ee.printStackTrace();
-						}
-					};
-				});
-
 
 				panesTuple.add(tuple);
-				buts.add(follow);
 
 			}
 		}
@@ -165,14 +144,17 @@ public class ListarQtdProdutoEmEstoqueController {
 	
 	@FXML
 	private void handlerBuscar() {
-		if(choiceBoxListaLojas.getValue() != null) {
+		final String compair[] = choiceBoxListaLojas.getValue().split(" ");
+		if(compair[0] != null) {
 			try {
-				listaProdutosEstoque = LojaEstoqueProdutoService.buscarcnpj(choiceBoxListaLojas.getValue());
+				System.out.println("AQUI " + compair[0]);
+				listaProdutosEstoque = LojaEstoqueProdutoService.buscarcnpj(compair[0]);
+				listSize = listaProdutosEstoque.size();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			loadPage();			
+			loadPage();
 		}
 	}
 	
